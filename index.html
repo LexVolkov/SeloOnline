@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ua">
+<head>
+    <title>Sl8_Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" type="text/css" />
+    <link rel="stylesheet" href="loader.css" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        .gold-coin {
+            display: inline-block;
+            width: 13px;
+            height: 13px;
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+    </style >
+    <script id="panel-init" type="text/javascript">
+        $(function () { 
+            $("body>[data-role='panel']").panel();
+        });
+    </script>
+    <script id="toolbar-init" type="text/javascript">
+        $(function () {
+            $("body>[data-role='footer']").toolbar();
+        });
+    </script>
+
+    <script src="js/jQuery.js" type="text/javascript"></script>
+    
+    
+</head>
+
+<body>
+
+<!--  -->
+<!-- SELO NEW GAME PAGE -->
+<!--  -->
+<div data-role="page" id="page_new_game" data-title="Selo Edition" align='center' class="ui-page-theme-b">
+    <div data-role="header">
+        <h1>New Game</h1>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content" style="max-width: 500px;">
+
+        <div id="div_new_game"></div>
+
+    </div><!-- /content -->
+    <div data-role="footer" class="footer_links"></div><!-- /footer -->
+
+
+</div><!-- /page -->
+    
+    <!--  -->
+    <!-- SELO PAGE -->
+    <!--  -->
+
+    <div data-role="page" id="page_week" data-title="Selo Edition" align='center' class="ui-page-theme-b">
+        <div data-role="header">
+            <h1 id="page_title">Selo edition</h1>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="#page_next_week" onclick="game.OnNextWeek()"  data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right ui-btn-b">Наступний тиждень</a>
+
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content" style="max-width: 500px;">
+
+            <div id="people_info"></div>
+
+            <div id="homeowners_info"></div>
+
+            <div id="army_info"></div>
+
+            <div id="satlvl_info"></div>
+
+            <div id="partys_info"></div>
+
+            <h3 class="ui-bar ui-bar-b">Економіка</h3>
+
+            <div id="budget_info"></div>
+
+            <div id="costs_info"></div>
+
+            <div id="contracts_info"></div>
+
+            <div id="production_info"></div>
+
+            <h3 class="ui-bar ui-bar-b">Ринок</h3>
+
+            <div id="offers_info"></div>
+
+            <div data-role="popup" id="popupDialog_offers" data-overlay-theme="b" data-theme="b" data-dismissible="true">
+                <div data-role="header" data-theme="b">
+                    <h4>Договір</h4>
+                </div>
+                <div role="main" class="ui-content">
+                    <div id="offer_info"></div>
+                    <p>На період:</p>
+                    <div id="offer_slider"></div>
+                    <form>
+                        <label for="contract_slider" class="ui-hidden-accessible">Slider:</label>
+                        <input type="range" name="contract_slider" id="contract_slider" min="0" max="100" value="0" />
+                    </form>
+
+                    <div id="offer_but"></div>
+                </div>
+            </div>
+
+
+            <h3 class="ui-bar ui-bar-b">
+                Будівлі:
+            </h3>
+            <a onclick="game.OnOpenBuildingList()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-b">Додати</a>
+
+            <div id="build_active_info"></div>
+            <div id="build_deactive_info"></div>
+            <div id="build_planned_info"></div>
+
+        </div><!-- /content -->
+        <div data-role="footer" class="footer_links"></div><!-- /footer -->
+
+
+    </div><!-- /page -->
+
+<!--  -->
+<!-- SELO ADD BUILDING PAGE -->
+<!--  -->
+<div data-role="page" id="page_add_building" data-title="Selo Edition" align='center' class="ui-page-theme-b">
+    <div data-role="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Назад</a>
+        <h1>Виберіть будівлю</h1>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content" style="max-width: 500px;">
+
+        <div id="buildings_list"></div>
+
+    </div><!-- /content -->
+    <div data-role="footer" class="footer_links"></div><!-- /footer -->
+
+
+</div><!-- /page -->
+
+<!--  -->
+<!-- SELO NEXT WEEK PAGE -->
+<!--  -->
+<div data-role="page" id="page_next_week" data-title="Selo Edition" align='center' class="ui-page-theme-b">
+    <div data-role="header">
+        <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Назад</a>
+        <h1 id="next_week_header"></h1>
+        <a href="#page_week"  id="but_next_week_done" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini  ui-icon-carat-r ui-btn-icon-right">Далі</a>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content" style="max-width: 500px;">
+
+        <div id="div_next_week_info"></div>
+
+    </div><!-- /content -->
+    <div data-role="footer" class="footer_links"></div><!-- /footer -->
+
+
+</div><!-- /page -->
+
+    
+  <!--
+     <div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-theme="b">
+        <a href="https://t.me/Lex_Volkov" class="ui-btn ui-shadow ui-corner-all">Lex Volkov</a>
+    </div>
+-->
+</body>
+
+</html>

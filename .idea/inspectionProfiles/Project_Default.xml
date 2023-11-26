@@ -1,0 +1,26 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="12">
+            <item index="0" class="java.lang.String" itemvalue="data-role" />
+            <item index="1" class="java.lang.String" itemvalue="data-title" />
+            <item index="2" class="java.lang.String" itemvalue="data-iconpos" />
+            <item index="3" class="java.lang.String" itemvalue="data-rel" />
+            <item index="4" class="java.lang.String" itemvalue="data-theme" />
+            <item index="5" class="java.lang.String" itemvalue="data-icon" />
+            <item index="6" class="java.lang.String" itemvalue="data-overlay-theme" />
+            <item index="7" class="java.lang.String" itemvalue="data-position-to" />
+            <item index="8" class="java.lang.String" itemvalue="data-dismissible" />
+            <item index="9" class="java.lang.String" itemvalue="data-collapsed" />
+            <item index="10" class="java.lang.String" itemvalue="role" />
+            <item index="11" class="java.lang.String" itemvalue="data-transition" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+  </profile>
+</component>
