@@ -9,8 +9,8 @@ function RuleBook() {
         villages: new Rule({
             products_permited: [PRODUCTIONS.WHEAT],
             max_contracts: 1,
-            min_restruction: 0.1,
-            max_restruction: 0.5
+            min_restruction: 0.4,
+            max_restruction: 0.45
         }),
         citys: new Rule({
             products_permited: this.arr_prod_city,
@@ -26,8 +26,8 @@ function RuleBook() {
                                 PRODUCTIONS.BEETROOT,
                                 PRODUCTIONS.SUNFLOWER],
             max_contracts: 1,
-            min_restruction: 0.1,
-            max_restruction: 0.5
+            min_restruction: 0.3,
+            max_restruction: 0.6
         }),
         citys: new Rule({
             products_permited: this.arr_prod_city,
@@ -46,7 +46,7 @@ function RuleBook() {
                                 PRODUCTIONS.COTTON,
                                 PRODUCTIONS.MEAT],
             max_contracts: 2,
-            min_restruction: 0.1,
+            min_restruction: 0.2,
             max_restruction: 0.5
         }),
         citys: new Rule({
@@ -69,8 +69,8 @@ function RuleBook() {
                                 PRODUCTIONS.AMBER,
                                 PRODUCTIONS.IRON],
             max_contracts: 3,
-            min_restruction: 0.1,
-            max_restruction: 0.5
+            min_restruction: 0.2,
+            max_restruction: 0.6
         }),
         citys: new Rule({
             products_permited: this.arr_prod_city,
@@ -93,7 +93,7 @@ function RuleBook() {
                                 PRODUCTIONS.IRON],
             max_contracts: 3,
             min_restruction: 0.1,
-            max_restruction: 0.5
+            max_restruction: 0.6
         }),
         citys: new Rule({
             products_permited: this.arr_prod_city,

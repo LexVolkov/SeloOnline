@@ -17,8 +17,10 @@ function Game(){
         selo.balance = CalculateBalance();
         selo.buildings.Build();
         const population = selo.partys.Population();
-        selo.buildings.DisableBuildingsWithoutWorkers(population);
+        selo.buildings.DisableBuildingsWithoutWorkers(population);//TODO работает?
         selo.contracts.DecreaseContractPeriod();
+        const joylvl_total = CalculateTotalHappiness().joylvl_total;
+        selo.partys.UpdatePopulation(joylvl_total);
         UpdateWeek()
     }
     function UpdateWeek() {
@@ -38,6 +40,9 @@ function Game(){
         result = result + contract_profit - costs_total;
         return result;
     }
+
+
+
     function UpdateData() {
         selo.offers.UpdateContracts(selo.week);
     }
@@ -62,7 +67,7 @@ function Game(){
         const unemployment = (work.unemployment / population * 100).toFixed(0) + "%";
         const homeowners = selo.buildings.Homeowners(population);
         const homeowners_total = homeowners.total;
-        const homeless = ((homeowners.homeless / population) * 100).toFixed(0);
+        const homeless = ((homeowners.homeless / population) * 100).toFixed(0) + "%";
         $(GV.ID_IFNO_PEOPLE).html(display.DisplayPeople(population, workers, unemployment, homeowners_total, homeless));
         UpdateCollapsible();
     }
@@ -88,6 +93,16 @@ function Game(){
         UpdateCollapsible()
     }
     function ShowJoyInfo() {
+        const total_happiness = CalculateTotalHappiness()
+        $(GV.ID_IFNO_JOYLVL).html(display.DisplayJoy(
+            total_happiness.joylvl_total,
+            total_happiness.joylvl_unemployeds,//TODO безробітні 1.5 при 0%?
+            total_happiness.joylvl_homeless,
+            total_happiness.joylvl_parties,
+            total_happiness.joylvl_buildings));
+        UpdateCollapsible()
+    }
+    function CalculateTotalHappiness() {
         const joylvl_buildings = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_HAPPINESS);
         const church_happiness = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_CHURCH_HAPPINESS)
         const joylvl_parties = selo.partys.PartyHappiness(church_happiness);
@@ -99,12 +114,11 @@ function Game(){
         const unemployment = Number((work.unemployment / population * 100).toFixed(0));
         const joylvl_unemployeds = CalculateUnemploymentJoyLvl(unemployment);
         const joylvl_total = Number(GV.BASIC_HAPPINESS) +
-                                        Number(joylvl_unemployeds) +
-                                        Number(joylvl_homeless) +
-                                        Number(joylvl_parties) +
-                                        Number(joylvl_buildings);
-        $(GV.ID_IFNO_JOYLVL).html(display.DisplayJoy(joylvl_total, joylvl_unemployeds, joylvl_homeless, joylvl_parties, joylvl_buildings));
-        UpdateCollapsible()
+            Number(joylvl_unemployeds) +
+            Number(joylvl_homeless) +
+            Number(joylvl_parties) +
+            Number(joylvl_buildings);
+        return {joylvl_total:joylvl_total, joylvl_unemployeds:joylvl_unemployeds, joylvl_homeless:joylvl_homeless, joylvl_parties:joylvl_parties, joylvl_buildings:joylvl_buildings};
     }
     function ShowBalanceInfo() {
         $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance));
@@ -172,6 +186,7 @@ function Game(){
     function CheckProductRequirements(requirements){
         return selo.buildings.CheckRequirements(requirements);
     }
+
     this.OnAddPlannedBuilding = function(building_key){
         selo.buildings.AddPlannedBuilding(building_key);
         ShowCostsInfo();
@@ -188,6 +203,7 @@ function Game(){
     this.OnDeletePlannedBuilding = function (i){
         selo.buildings.DeletePlannedBuild(i);
         ShowBuildingInfo();
+        this.OnNextWeek();
     }
 
     function ShowOffersInfo(){
@@ -197,18 +213,31 @@ function Game(){
         const offers = selo.offers.GetOffersList();
         const contract_count = selo.contracts.GetContractCount();
         const caravans_count = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_CARAVAN);
-        const caravans_available = contract_count< caravans_count;
+        const caravans_available = contract_count < caravans_count;
         const have_mail = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_MAIL) > 0;
-        $(GV.ID_IFNO_OFFERS_LIST).html(display.DisplayOffersList(offers, caravans_available, have_mail));
+        $(GV.ID_IFNO_OFFERS_LIST).html(display.DisplayOffersList(offers, caravans_available, have_mail, CheckProductAmountRequirements));
         UpdateCollapsible();
     }
-    this.OnOpenAddContractPopup = function(product_name,amount){
-        display.ShowAddContractPopUp(product_name,amount);
-        $(GV.ID_OFFER_POPUP_DIALOG).popup("open");
+    function CheckProductAmountRequirements(req_product, amount){
+        const total_product_amount = selo.buildings.CalculateTotalProd(req_product);
+        const total_contract_amount = selo.contracts.CalculateTotalProd(req_product);
+        //console.log(amount,total_product_amount,total_contract_amount)
+        return amount <= total_product_amount-total_contract_amount;
     }
-    this.OnAddContract = function (product_name,amount){
+    this.OnOpenAddContractPopup = function(cid){
+        const contract = selo.offers.GetContractFromCID(cid);
+        if(contract !== undefined){
+            display.ShowAddContractPopUp(contract);
+            $(GV.ID_OFFER_POPUP_DIALOG).popup("open");
+        }else{
+            console.error("Wrong cid:"+cid);
+        }
+    }
+    this.OnAddContract = function(cid){
+        const contract = selo.offers.GetContractFromCID(cid);
         const period = $(GV.ID_CONTRACT_SLIDER).val();
-        selo.contracts.AddContract(Warehouse.GetProductFromName(product_name),period,amount);
+        selo.contracts.AddContract(contract.product,period,contract.amount);
+        selo.offers.RemoveContract(contract);
         ShowContractInfo();
         ShowOffersInfo();
     }

@@ -23,13 +23,27 @@ function Portfolio() {
     }
     this.removeObjectsWithZeroPeriod = function () {
         // Фильтрация массива, оставляя только объекты, у которых period не равен 0
-        var filteredArray = portfolio.filter(function (obj) {
+        portfolio = portfolio.filter(function (obj) {
             return obj.period !== 0;
         });
-        portfolio = filteredArray;
     }
 
     this.AddContract = function (product, period, amount){
         portfolio.push(new Contract(product, period, amount));
+    }
+
+    this.CalculateTotalProd = function (target_product) {
+        return portfolio.reduce((total, prop) => {
+            let sum = 0;
+            if (prop.product === target_product) {
+                sum += prop.amount;
+            }
+            return total + sum;
+        }, 0);
+    }
+    this.RemoveContract = function(contract){
+        portfolio = portfolio.filter(function (contract) {
+            return contract !== contract;
+        });
     }
 }

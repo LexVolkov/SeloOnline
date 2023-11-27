@@ -10,11 +10,29 @@ GV.BASIC_HAPPINESS = 5;//Общий базовый показатель счас
 GV.MAX_CONTRACTS_PERIOD = 3;//Максимально недель сколько может держаться контракт от одного контрагента
 GV.MIN_CONTRACT_OFFER = 2;//Мин кол-во предложений от агента
 GV.MAX_CONTRACT_OFFER = 8;//Макс -//-
+GV.FORMULA_HAPPINESS = [
+    {lvl:10, migrants:30},
+    {lvl:9, migrants:25},
+    {lvl:8, migrants:15},
+    {lvl:7, migrants:10},
+    {lvl:6, migrants:5},
+    {lvl:5, migrants:0},
+    {lvl:4, migrants:-5},
+    {lvl:3, migrants:-10},
+    {lvl:2, migrants:-15},
+    {lvl:1, migrants:-20},
+    {lvl:0, migrants:-30}
+]
 
-GV.PARTY_BASIC_HAPPINESS = 5;
-GV.PARTY_START_MEMBERS = 10;
-GV.PARTY_MAIMMAN_SALARY = 320;
-GV.PARTY_PARTYMAN_BASIC_SALARY = 100;
+GV.PARTY_BASIC_HAPPINESS = 5;//База счатья для подсчетов
+GV.PARTY_START_MEMBERS_KOZAKS = 10;//Начальное кол-во членов партии
+GV.PARTY_START_MEMBERS_FARMMANS = 3;//Начальное кол-во членов партии
+GV.PARTY_START_MEMBERS_CHURCHMANS = 15;//Начальное кол-во членов партии
+GV.PARTY_START_MEMBERS_TRADES = 5;//Начальное кол-во членов партии
+GV.PARTY_START_MEMBERS_FREEMANS = 7;//Начальное кол-во членов партии
+GV.PARTY_START_MEMBERS_HANDMADEMANS = 10;//Начальное кол-во членов партии
+GV.PARTY_MAIMMAN_SALARY = 320;//Зп голове
+GV.PARTY_PARTYMAN_BASIC_SALARY = 100;//За министрам
 
 GV.PARTY_TITLE_MAINMAN = "Голова села";
 GV.PARTY_TITLE_KOZAKS = "Козаки";

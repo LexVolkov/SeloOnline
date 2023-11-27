@@ -11,16 +11,6 @@ function Offers() {
         return offers;
     }
 
-    this.GetContractFromCID = function (cid) {
-        let output_contract = false;
-        offers.forEach((offer) => {
-            offer.contracts.forEach((contract) => {
-                if (contract.cid == cid) output_contract = contract;
-            });
-        });
-        return output_contract;
-    };
-
     this.UpdateContracts = function (current_week_number) {
         const current_rules = ruleBook.getCurrentRules(current_week_number);
         const villages_rules = current_rules.villages;
@@ -59,14 +49,24 @@ function Offers() {
         const randomValue = Math.random() * (max_restruction - min_restruction) + min_restruction;
         return Math.floor(product_base_amount * randomValue);
     }
-
-    /*this.AddContractFromCID = function (cid) {
-        let contract = contragents.GetContractFromCID(cid);
-        let period = $(link_contract_slider).val();
-        let new_contract = new Contract(contract.product, period, contract.amount, contract.cid);
-        portfolio.push(new_contract);
-
-        UpdateOffersList(); !!!!!!!!!
-        
-    }*/
+    this.RemoveContract = function(target_contract){
+        offers.forEach((offer)=>{
+            offer.contracts.GetAllContracts().forEach((contract) => {
+                if (contract === target_contract) {
+                    offer.contracts.RemoveContract(contract);
+                }
+            });
+        })
+    }
+    this.GetContractFromCID = function(cid){
+        let find_contract = undefined;
+        offers.forEach((offer)=>{
+            offer.contracts.GetAllContracts().forEach((contract) => {
+                if (contract.cid === Number(cid)) {
+                    find_contract = contract;
+                }
+            });
+        })
+        return find_contract;
+    }
 }

@@ -169,10 +169,6 @@ function Builder() {
             planned.splice(index, 1);
         }
     }
-
-    this.CalculateTotalReq = function (buildings, property) {
-        return this.CalculateTotalProd(buildings, property, requirements = true);
-    }
     this.CalculateTotalProd = function (target_product, requirements = false) {
         let par_name = GV.BUILD_PAR_PRODUCTION ;
         if (requirements) {

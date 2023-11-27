@@ -238,7 +238,7 @@ function Display() {
         content += '</div >';
         return content;
     }
-    this.DisplayOffersList = function (arr_offers, caravans_available, have_mail) {
+    this.DisplayOffersList = function (arr_offers, caravans_available, have_mail, func_CheckProductAmountRequirements) {
         const addContract_butText = 'Прийняти';
         let arr_data_villages = [];
         let arr_data_citys = [];
@@ -258,15 +258,18 @@ function Display() {
                     const amount = contract.amount;
                     const price = contract.product.price;
                     const product_name = Warehouse.GetProductName(contract.product);
-                    let but = `<a href="#" onclick="game.OnOpenAddContractPopup('${product_name}',${amount})">${addContract_butText}</a>`;
+                   let but = `<a href="#" onclick="game.OnOpenAddContractPopup(${contract.cid})">${addContract_butText}</a>`;
                     if (caravans_available) {
                         if (contragent.type === CONTRAGENT_TYPE.CITY && !have_mail) {
+                            but = '<span style="color: rgb(128,128,128);">' + addContract_butText + '</span>';
+                        }
+                        const have_product_amount = func_CheckProductAmountRequirements(contract.product, amount);
+                        if(!have_product_amount){
                             but = '<span style="color: rgb(128,128,128);">' + addContract_butText + '</span>';
                         }
                     } else {
                         but = '<span style="color: rgb(128,128,128);">' + addContract_butText + '</span>';
                     }
-
                     arr_data.push({title:product_title,value:`${amount} (${GV.QCCOIN_PNG}${(price*amount)})`, but:but});
                 }
                 arr_colset_data = {title:agent_title,arr_data:arr_data};
@@ -279,17 +282,16 @@ function Display() {
         col_content += CreateOffersCollapsible("Міста", arr_data_citys);
         return CreateCollapsibleset(col_content)
     }
-    this.ShowAddContractPopUp = function(product_name,amount) {
-        let product = Warehouse.GetProductFromName(product_name);
-
-        $(GV.ID_OFFER_INFO).html('Ви хочете заключити контракт на: <h4>' + product.tittle + '</h4> в розмірі: </br><h3>' + amount + '</h3>');
+    this.ShowAddContractPopUp = function(contract) {
+        let product = contract.product;
+        $(GV.ID_OFFER_INFO).html('Ви хочете заключити контракт на: <h4>' + product.tittle + '</h4> в розмірі: </br><h3>' + contract.amount + '</h3>');
 
         $(GV.ID_CONTRACT_SLIDER).attr("min", GV.MIN_CONTRACT_OFFER);
         $(GV.ID_CONTRACT_SLIDER).attr("max", GV.MAX_CONTRACT_OFFER);
         $(GV.ID_CONTRACT_SLIDER).attr("value", GV.MIN_CONTRACT_OFFER);
 
         $(GV.ID_OFFER_BUT).html('<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Відміна</a>' +
-            `<a href="#" onclick="game.OnAddContract('${product_name}',${amount})" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-rel="back">Додати</a>`
+            `<a href="#" onclick="game.OnAddContract(${contract.cid})" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-rel="back">Додати</a>`
         );
     }
     function ErrorDiv(error_text){

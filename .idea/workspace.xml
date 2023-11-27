@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/build/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/builder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/db_settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/db_settings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/display.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/offers/class_contract.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/class_contract.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/offers/db_contracts_rules.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/db_contracts_rules.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/offers/offers.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/offers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/offers/portfolio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/portfolio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/partys/duma.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/partys/duma.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +103,7 @@
       <workItem from="1701011879639" duration="14982000" />
       <workItem from="1701027049317" duration="368000" />
       <workItem from="1701027536648" duration="7591000" />
-      <workItem from="1701035224997" duration="9612000" />
+      <workItem from="1701035224997" duration="24080000" />
     </task>
     <task id="LOCAL-00002" summary="new">
       <option name="closed" value="true" />
@@ -131,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701044026142</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="refactoring CalculateBalance">
+      <option name="closed" value="true" />
+      <created>1701047508713</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701047508713</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,16 +177,5 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value="refactoring CalculateBalance" />
     <option name="LAST_COMMIT_MESSAGE" value="refactoring CalculateBalance" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/game/game.js</url>
-          <line>159</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
