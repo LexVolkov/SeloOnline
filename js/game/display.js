@@ -1,7 +1,7 @@
 function Display() {
-    function CreateCollapsible(header, arr_col_data) {//[{title:"",value:0}]
+    function CreateCollapsible(header, arr_col_data, collapsed = true) {//[{title:"",value:0}]
         let content = "";
-        content += '<div class="col" data-role="collapsible" data-collapsed="true" align="left">';
+        content += `<div class="col" data-role="collapsible" data-collapsed="${collapsed}" align="left">`;
         content += '<h4>' + header + '</h4>';
 
         content += '<div class="ui-grid-a">';
@@ -14,10 +14,10 @@ function Display() {
         return content;
     }
 
-    function CreateCollapsibleset(col_content, header = ""){//[{title:"",arr_data:[]}]
+    function CreateCollapsibleset(col_content, header = "", collapsed = true){//[{title:"",arr_data:[]}]
         let content = "";
         if(header !== ""){
-            content += `<div class="col" data-role="collapsible" data-collapsed="true">`
+            content += `<div class="col" data-role="collapsible" data-collapsed="${collapsed}">`
             content += `<h3 class="ui-bar ui-bar-b">${header}</h3>`;
         }
         content += `<div class="colset" data-role="collapsibleset" data-iconpos="left">`;
@@ -37,8 +37,7 @@ function Display() {
             { title: "Безхатьки: ", value: homeless }
         ];
 
-        $(GV.ID_IFNO_PEOPLE).html(CreateCollapsible(header, arr_data));
-        $(".col").collapsible();
+        return CreateCollapsible(header, arr_data);
     }
     this.DisplayHomeowners = function (homeowners_total, kopanka, barraks, sadiba) {
         const header = `Проживання: ${homeowners_total}`;
@@ -47,8 +46,8 @@ function Display() {
             { title: "Бараки: ", value: barraks},
             { title: "Садиба: ", value: sadiba }
         ];
-        $(GV.ID_IFNO_HOMEOWNERS).html(CreateCollapsible(header, arr_data));
-        $(".col").collapsible();
+        return CreateCollapsible(header, arr_data)
+
     }
     this.DisplayArmy = function (army_total, protection, cossacks, guns) {
         const header = `Армія: ${army_total}`;
@@ -57,34 +56,31 @@ function Display() {
             { title: "Козаки: ", value: cossacks },
             { title: "Гармати: ", value: guns }
         ];
-        $(GV.ID_IFNO_ARMY).html(CreateCollapsible(header, arr_data));
-        $(".col").collapsible();
+        return CreateCollapsible(header, arr_data)
     }
     this.DisplayJoy = function (joylvl_total, joylvl_unemployeds, joylvl_homeless, joylvl_parties, joylvl_buildings) {
         const header = `Рівень задоволення: ${joylvl_total}`;
         const arr_data = [
-            { title: "Невдоволення безробітних: ", value: joylvl_unemployeds },
-            { title: "Невдоволення безхатьків: ", value: joylvl_homeless },
-            { title: "Середній рівень задоволення партій: ", value: joylvl_parties },
+            { title: "Безробітні: ", value: joylvl_unemployeds },
+            { title: "Безхатьки: ", value: joylvl_homeless },
+            { title: "Партії: ", value: joylvl_parties },
             { title: "Бонус від будинків: ", value: joylvl_buildings }
         ];
-        $(GV.ID_IFNO_JOYLVL).html(CreateCollapsible(header, arr_data));
-        $(".col").collapsible();
+        return CreateCollapsible(header, arr_data);
     }
     this.DisplayBalance = function (balance) {
-        $(GV.ID_IFNO_BUDGET).html(`<h3>Поточний бюджет села: ${GV.QCCOIN_PNG}${balance}</h3>`);
+        return `<h3>Поточний бюджет села: ${GV.QCCOIN_PNG}${balance}</h3>`;
     }
-    this.DisplayCosts = function (costs_total, costs_workers, costs_mainmans, costs_construction) {
-        const header = `Витрати на наступний тиждень: ${costs_total}`;
+    this.DisplayCosts = function (costs_total, costs_workers, costs_mainmans, costs_construction, collapsed = true) {
+        const header = `Витрати на наступний тиждень: ${GV.QCCOIN_PNG}-${costs_total}`;
         const arr_data = [
             { title: "З/П робітникам: ", value: costs_workers },
             { title: "З/П міністрам: ", value: costs_mainmans },
             { title: "Витрати на будівництво: ", value: costs_construction }
         ];
-        $(GV.ID_IFNO_COSTS).html(CreateCollapsible(header, arr_data));
-        $(".col").collapsible();
+        return CreateCollapsible(header, arr_data, collapsed);
     }
-    this.DisplayContracts = function (contracts) {
+    this.DisplayContracts = function (contracts, collapsed = true) {
         let arr_data = [];
         let total_sum = 0;
         contracts.forEach((contract) => {
@@ -95,15 +91,14 @@ function Display() {
             total_sum += contract_sum;
         })
 
-        const header = `Поточні контракти: ${GV.QCCOIN_PNG}${total_sum} (${contracts.length})`;
+        const header = `Поточні контракти: ${GV.QCCOIN_PNG}+${total_sum} (${contracts.length})`;
         if(contracts.length <= 0) arr_data.push({title:"Немає жодного контракту", value:""});
-        $(GV.ID_IFNO_CONTRACTS).html(CreateCollapsible(header, arr_data));
-        $(".col").collapsible();
+
+        return CreateCollapsible(header, arr_data, collapsed);
     }
     this.DisplayProductions = function (arr_data) {
         const header = `Видобуток:`;
-       $(GV.ID_IFNO_PRODUCTION).html(CreateCollapsible(header, arr_data));
-        $(".col").collapsible();
+        return CreateCollapsible(header, arr_data);
     }
     this.DisplayPartys = function (partys,population, church_happiness) {
         $(GV.ID_IFNO_PARTYS).empty();
@@ -126,9 +121,7 @@ function Display() {
         })
         let col_content = "";
         arr_colset_data.forEach((data)=>col_content += CreateCollapsible(data.title, data.arr_data))
-        $(GV.ID_IFNO_PARTYS).html(CreateCollapsibleset(col_content, header));
-        $(".col").collapsible();
-        $(".colset").collapsibleset();
+        return CreateCollapsibleset(col_content, header);
     }
     this.DisplayActiveBuildings = function (buildings) {
         let count = 0;
@@ -144,9 +137,7 @@ function Display() {
         const header = `Активні (${count})`;
         let col_content = "";
         arr_colset_data.forEach((data)=>col_content += CreateCollapsible(data.title, data.arr_data))
-        $(GV.ID_IFNO_BUILD_ACTIVE).html(CreateCollapsibleset(col_content, header));
-        $(".col").collapsible();
-        $(".colset").collapsibleset();
+        return CreateCollapsibleset(col_content, header);
     }
     this.DisplayDeActiveBuildings = function (buildings) {
         let count = 0;
@@ -162,25 +153,25 @@ function Display() {
         const header = `Відключені (${count})`;
         let col_content = "";
         arr_colset_data.forEach((data)=>col_content += CreateCollapsible(data.title, data.arr_data))
-        $(GV.ID_IFNO_BUILD_DEACTIVE).html(CreateCollapsibleset(col_content, header));
-        $(".col").collapsible();
-        $(".colset").collapsibleset();
+        return CreateCollapsibleset(col_content, header);
     }
-    this.DisplayPlannedBuildings = function (buildings) {
+    this.DisplayPlannedBuildings = function (buildings, collapsed = true) {
         let count = 0;
         let arr_colset_data = [];
+        let construction_price = 0;
         for (let i = 0; i <buildings.length; i++) {
             const building = buildings[i];
             const but = `<a onclick="game.OnDeletePlannedBuilding(${i})" href="#" class="ui-btn ui-mini ui-btn-inline ui-icon-back ui-btn-icon-left">Відмінити</a>`;
-            arr_colset_data.push(GetBuildingDescritopn(building, but))
+            let b_des = GetBuildingDescritopn(building, but);
+            b_des.title = building.title+` ${GV.QCCOIN_PNG}-${building.price}`;
+            arr_colset_data.push(b_des)
+            construction_price += building.price;
             count++;
         }
-        const header = `Заплановані (${count})`;
+        const header = `Заплановані (${count}) ${GV.QCCOIN_PNG}-${construction_price}`;
         let col_content = "";
         arr_colset_data.forEach((data)=>col_content += CreateCollapsible(data.title, data.arr_data))
-        $(GV.ID_IFNO_BUILD_PLANNED).html(CreateCollapsibleset(col_content, header));
-        $(".col").collapsible();
-        $(".colset").collapsibleset();
+        return CreateCollapsibleset(col_content, header, collapsed);
     }
     function GetBuildingDescritopn(building, but = ""){
         const arr_data = [];
@@ -228,9 +219,7 @@ function Display() {
 
             col_content += CreateCollapsibleset(building_content, type);
         }
-        $(GV.ID_IFNO_BUILDINGS_LIST).html(CreateCollapsibleset(col_content));
-        $(".col").collapsible();
-        $(".colset").collapsibleset();
+        return CreateCollapsibleset(col_content);
     }
     //[{title:"",arr_data:[{title:"",value:0, but:""}]}]
     function CreateOffersCollapsible(header, arr_offers_data) {
@@ -288,9 +277,7 @@ function Display() {
         let col_content = "";
         col_content += CreateOffersCollapsible("Села", arr_data_villages);
         col_content += CreateOffersCollapsible("Міста", arr_data_citys);
-        $(GV.ID_IFNO_OFFERS_LIST).html(CreateCollapsibleset(col_content));
-        $(".col").collapsible();
-        $(".colset").collapsibleset();
+        return CreateCollapsibleset(col_content)
     }
     this.ShowAddContractPopUp = function(product_name,amount) {
         let product = Warehouse.GetProductFromName(product_name);
@@ -304,125 +291,24 @@ function Display() {
         $(GV.ID_OFFER_BUT).html('<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Відміна</a>' +
             `<a href="#" onclick="game.OnAddContract('${product_name}',${amount})" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-rel="back">Додати</a>`
         );
-
-        $(GV.ID_OFFER_POPUP_DIALOG).popup("open");
-
-
     }
     function ErrorDiv(error_text){
         return `<b style="color:#ff0000;">${error_text}</b>`;
     }
+    this.ShowNWPHeader = function(week){//Next Week Page Header
+        return week + " &gt; " + (week+ 1) + " тиждень";
+    }
+    this.ShowNWPNextWeekBalance = function (next_week_balance){
+        return `<p><b>Залишок на наступному тижні: ${GV.QCCOIN_PNG}${next_week_balance}  </b></p>`;
+    }
+    this.ShowErrorCosts = function (){
+        return "<p><b style='color:red;'>Не вистачає коштів!</b></p>";
+    }
+    this.ShowNWPErrorBuilders= function (builders, construct_time, max_build_days){
+        let txt = "";
+        txt += "<p><b style='color:red;'>Не вистачає будівеьлників!</b></p>";
+        txt += "<p>Треба днів для побудови:"+construct_time+"</p>";
+        txt += "<p>Будівельників в наявності: " + builders + " (" + max_build_days + " дн)</p>";
+        return txt;
+    }
 }
-
-    function PrepareNextWeek(selo) {
-
-        const content = "#next_week_popup_content";
-
-        $("#but_next_week_done").removeClass("ui-state-disabled");
-        $("#next_week_popup_header").html(selo.week + " &gt; " + (selo.week + 1) + " тиждень");
-        $(content).empty();
-
-
-        //=== info money ===
-
-        $(content).append("<p><b>Доходи на наступний тиждень</b></p>");
-
-        //=== info contracts ===
-
-        $(content).append("<h4>Поточні контракти:</h4>");
-
-        let contacts_content = '';
-
-        contacts_content += ('<div class="ui-grid-a">');
-        contract_sum = 0;
-        for (let i = 0; i < selo.contracts.length; i++) {
-            const contract = selo.contracts[i];
-            contacts_content += ('<div class="ui-block-a"><div class="ui-bar ui-bar-b">' + contract.product.tittle + '</div></div>');
-            contacts_content += ('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + (contract.product.price * contract.amount) + '</div></div>');
-            contract_sum += contract.product.price * contract.amount;
-        };
-        contacts_content += ('<div class="ui-block-a"><div class="ui-bar ui-bar-b">Всього:</div></div>');
-        contacts_content += ('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + contract_sum + '</div></div>');
-        contacts_content += ('</div></br>');
-        $(content).append(contacts_content);
-
-        //=== info costs ===
-
-        $(content).append("<p><b>Витрати на наступний тиждень</b></p>");
-
-        //=== info salary ===
-
-        $(content).append("<h4>Ви заплатите зарплатню:</h4>");
-
-        let salaryCosts = 0;
-
-        const population = Number(Population(Parties));
-        const totalWorkerplaces = TotalWorkerplace(selo.buildings);
-        const workersCosts = WorkersCosts(selo.buildings, Work(totalWorkerplaces, population).workers);
-
-        const ministersCosts = MinistersCosts(Parties);
-        salaryCosts = workersCosts + ministersCosts;
-
-        let salaryContent = "";
-
-        salaryContent += ('<div class="ui-grid-a">');
-        salaryContent += ('<div class="ui-block-a"><div class="ui-bar ui-bar-b">Робітникам</div></div>');
-        salaryContent += ('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + workersCosts + '</div></div>');
-        salaryContent += ('<div class="ui-block-a"><div class="ui-bar ui-bar-b">Міністрам</div></div>');
-        salaryContent += ('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + ministersCosts + '</div></div>');
-        salaryContent += ('<div class="ui-block-a"><div class="ui-bar ui-bar-b">Всього:</div></div>');
-        salaryContent += ('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + salaryCosts + '</div></div>');
-        salaryContent += ('</div></br>');
-        $(content).append(salaryContent);
-
-        //=== info build ===
-
-        let buildCosts = 0;
-
-        if (arr_planned_build.length > 0) {
-            const builders = CalculateTotalBuildPar(selo.buildings, B_PAR_BUILDERS);
-            const days_of_week = 7;
-            const max_build_days = days_of_week * builders;
-            let build_list = '<div class="ui-grid-b">';
-            arr_planned_build.forEach((building) => {
-                build_list += '<div class="ui-block-a"><div class="ui-bar ui-bar-b">' + building.title + '</div></div>';
-                build_list += '<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + building.price + '</div></div>';
-                build_list += '<div class="ui-block-c"><div class="ui-bar ui-bar-b">' + building.constructionTime + 'дн</div></div>';
-            });
-            const build_days = TotalConstructTime(arr_planned_build);
-            const build_costs = TotalPrice(arr_planned_build);
-
-            build_list += '<div class="ui-block-a"><div class="ui-bar ui-bar-b">Всього:</div></div>';
-            build_list += '<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + build_costs + '</div></div>';
-            build_list += '<div class="ui-block-c"><div class="ui-bar ui-bar-b">' + build_days + 'дн</div></div>';
-
-            build_list += '</div>';
-
-            $(content).append("<h4>Ви хочете построїти:</h4>" + build_list);
-
-            $(content).append("<p>Будівельників в наявності: " + builders + " (" + max_build_days + " дн)</p>");
-            $(content).append("<p>Кошти в казні: " + selo.balance + "</p>");
-
-
-
-
-            if (build_costs > selo.balance) {
-                $(content).append("<b style='color:red;'>Не вистачає Коштів!</b></br>");
-                DisableNextWeekBut();
-            } else {
-                if (build_days > max_build_days) {
-                    $(content).append("<b style='color:red;'>Не вистачає будівеьлників!</b></br>");
-                    DisableNextWeekBut();
-                } else {
-                    buildCosts = build_costs;
-                }
-            }
-        }
-
-        $(content).append("<p><b>Залишок на наступному тижні: " + (selo.balance - buildCosts - salaryCosts + contract_sum) + "</b></p>");
-    }
-    function DisableNextWeekBut() {
-        $("#but_next_week_done").addClass("ui-state-disabled");
-    }
-
-

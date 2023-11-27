@@ -24,11 +24,10 @@
     'js/game/utility.js',
     'js/game/welcome.js',
 ];
-let firstLoad = true;
 function loadScripts(scriptPaths, callback) {
     let loadedScripts = 0;
     scriptPaths.forEach(function(path) {
-        var script = document.createElement('script');
+        let script = document.createElement('script');
         script.src = path;
         script.async = false; // Чтобы сохранить порядок выполнения скриптов
         script.onload = function() {
@@ -59,10 +58,10 @@ $(document).ready(function(){
         InitApp();
         PRODUCTIONS();
         game = new Game();
-        const welcome = new Welcome(game);
+        //const welcome = new Welcome(game);
 
 
-        const startBalance = 10000;
+        const startBalance = 1000;
         const startBuildings = ["silrada","house_of_builders", "stable", "wheat"];
         game.InitGame(startBalance, startBuildings);
         game.Start();

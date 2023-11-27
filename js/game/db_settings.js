@@ -13,8 +13,8 @@ GV.MAX_CONTRACT_OFFER = 8;//Макс -//-
 
 GV.PARTY_BASIC_HAPPINESS = 5;
 GV.PARTY_START_MEMBERS = 10;
-GV.PARTY_MAIMMAN_SALARY = 120;
-GV.PARTY_PARTYMAN_BASIC_SALARY = 50;
+GV.PARTY_MAIMMAN_SALARY = 320;
+GV.PARTY_PARTYMAN_BASIC_SALARY = 100;
 
 GV.PARTY_TITLE_MAINMAN = "Голова села";
 GV.PARTY_TITLE_KOZAKS = "Козаки";
@@ -65,6 +65,8 @@ GV.ID_IFNO_BUILD_PLANNED = "#build_planned_info";
 GV.ID_IFNO_BUILDINGS_LIST = "#buildings_list";
 GV.ID_IFNO_OFFERS_LIST = "#offers_info";
 GV.ID_IFNO_NEXT_WEEK = "#div_next_week_info";
+GV.ID_IFNO_NEXT_WEEK_HEADER = "#next_week_header";
+GV.ID_BUT_NEXT_WEEK_DONE = "#but_next_week_done";
 
 GV.ID_PAGE_NEW_GAME = "#page_new_game";
 GV.ID_PAGE_WEEK = "#page_week";

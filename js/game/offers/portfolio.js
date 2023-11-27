@@ -7,6 +7,9 @@ function Portfolio() {
     this.GetContractCount = function(){
         return portfolio.length;
     }
+    this.GetProfitOnThisWeek = function(){
+        return portfolio.reduce((total, contract) => total + (contract.amount*contract.product.price), 0);
+    }
     this.ProductExist = function (product){
         return portfolio.includes(product);
     }

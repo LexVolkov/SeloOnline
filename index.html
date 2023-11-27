@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" type="text/css" />
-    <link rel="stylesheet" href="loader.css" type="text/css" />
     <script src="https://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
     <style type="text/css">
@@ -68,6 +67,7 @@
 
         <div role="main" class="ui-content" style="max-width: 500px;">
 
+
             <div id="people_info"></div>
 
             <div id="homeowners_info"></div>
@@ -113,7 +113,7 @@
             <h3 class="ui-bar ui-bar-b">
                 Будівлі:
             </h3>
-            <a onclick="game.OnOpenBuildingList()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-b">Додати</a>
+            <a href="#page_add_building"  data-transition="slide" onclick="game.OnOpenBuildingList()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-b">Додати</a>
 
             <div id="build_active_info"></div>
             <div id="build_deactive_info"></div>

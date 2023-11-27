@@ -33,7 +33,7 @@ function Duma() {
 
     this.MinistersCosts = function () {
         let total_ministers_salary = parties.reduce((total, prop) => { return total + prop.salary; }, 0);
-        return (Number(total_ministers_salary) + Number(GV.PARTY_MAIMMAN_SALARY));
+        return (Number(total_ministers_salary) + Number(GV.PARTY_MAIMMAN_SALARY))/4;
     }
 
 }

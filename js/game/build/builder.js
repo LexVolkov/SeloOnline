@@ -41,7 +41,7 @@ function Builder() {
             return total + sum;
         }, 0);
     }
-    this.PlannedBuildTime = function() {//TotalConstructTime
+    this.PlannedBuildTime = function() {
         return planned.reduce((total, prop) => {
             let sum = 0;
             if (prop.active) {
@@ -119,7 +119,7 @@ function Builder() {
         if (homeplace.eliteplaces > population) {
             eliteplaces = population;
         }
-
+        //TODO Сделать подсчет в зависимости от зп
         return { total: homeowners, homeless: homeless, barraks: barraks, eliteplaces: eliteplaces };
     }
     this.Build = function (selo, planned_buildings) {
