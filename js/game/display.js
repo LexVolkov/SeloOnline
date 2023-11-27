@@ -295,20 +295,23 @@ function Display() {
     function ErrorDiv(error_text){
         return `<b style="color:#ff0000;">${error_text}</b>`;
     }
-    this.ShowNWPHeader = function(week){//Next Week Page Header
+    this.DisplayNWPHeader = function(week){//Next Week Page Header
         return week + " &gt; " + (week+ 1) + " тиждень";
     }
-    this.ShowNWPNextWeekBalance = function (next_week_balance){
+    this.DisplayNWPNextWeekBalance = function (next_week_balance){
         return `<p><b>Залишок на наступному тижні: ${GV.QCCOIN_PNG}${next_week_balance}  </b></p>`;
     }
-    this.ShowErrorCosts = function (){
+    this.DisplayErrorCosts = function (){
         return "<p><b style='color:red;'>Не вистачає коштів!</b></p>";
     }
-    this.ShowNWPErrorBuilders= function (builders, construct_time, max_build_days){
+    this.DisplayNWPErrorBuilders= function (builders, construct_time, max_build_days){
         let txt = "";
         txt += "<p><b style='color:red;'>Не вистачає будівеьлників!</b></p>";
         txt += "<p>Треба днів для побудови:"+construct_time+"</p>";
         txt += "<p>Будівельників в наявності: " + builders + " (" + max_build_days + " дн)</p>";
         return txt;
+    }
+    this.DisplayMainPageTitle = function(week){
+        return (week + " тиждень");
     }
 }

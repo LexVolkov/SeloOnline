@@ -10,58 +10,37 @@ function Game(){
         f_initGame = true;
     }
     this.Start = function (){
-        UpdateData();
-        UpdateInfo();
+        UpdateWeek();
     }
     function NextWeek() {
         selo.week++;
-        $("#page_title").html(selo.week + " тиждень");
-        selo.balance = CalculateBalance(selo, arr_planned_build);
-        Build(selo, arr_planned_build);
-        arr_planned_build = [];
-        CheckBuildWorker(selo.buildings, Work(TotalWorkerplace(selo.buildings), Number(Population(Parties))).workers);
-        ScrollContractPeriod(selo.contracts);
+        selo.balance = CalculateBalance();
+        selo.buildings.Build();
+        const population = selo.partys.Population();
+        selo.buildings.DisableBuildingsWithoutWorkers(population);
+        selo.contracts.DecreaseContractPeriod();
+        UpdateWeek()
+    }
+    function UpdateWeek() {
+        $(GV.ID_PAGE_WEEK_HEADER).html(display.DisplayMainPageTitle(selo.week));
         UpdateData();
         UpdateInfo();
     }
-    function CheckBuildWorker(buildings, workers) {
-        for (var building in buildings) {
-            if (building.active) {
-                if (workers >= building.workerplace) {
-                    workers = workers - building.workerplace;
-                } else {
-                    building.active = false;
-                }
-            }
-        }
-        //-- Доделать!!! Чтобы он считал каждое жилье по разному
-    }
+
     function CalculateBalance() {
-
         let result = selo.balance;
-        const build_costs = TotalPrice(planned_buildings);
-        result -= build_costs;
-
         const population = selo.partys.Population();
-        const totalWorkerplaces = TotalWorkerplace(selo.buildings);
-        const workersCosts = WorkersCosts(selo.buildings, Work(totalWorkerplaces, population).workers);
-        result -= workersCosts;
-        const ministersCosts = MinistersCosts(Parties);
-        result -= ministersCosts;
-        const contract_sum = arr_contracts.reduce((sum, contract) => sum + (contract.amount * contract.product.price), 0);
-        result += contract_sum;
-        //console.log(result);
-
+        const contract_profit = selo.contracts.GetProfitOnThisWeek();
+        const costs_construction = selo.buildings.PlannedBuildPrice();
+        const costs_mainmans = selo.partys.MinistersCosts();
+        const costs_workers = selo.buildings.WorkersCosts(population);
+        const costs_total = costs_construction+costs_mainmans+costs_workers;
+        result = result + contract_profit - costs_total;
         return result;
     }
-
-
-
-
     function UpdateData() {
         selo.offers.UpdateContracts(selo.week);
     }
-
     function UpdateInfo() {
         ShowPeopleInfo();
         ShowHomeownersInfo();
@@ -235,7 +214,7 @@ function Game(){
     }
     this.OnNextWeek = function (){
         let content = '';
-        $(GV.ID_IFNO_NEXT_WEEK_HEADER).html(display.ShowNWPHeader(selo.week));
+        $(GV.ID_IFNO_NEXT_WEEK_HEADER).html(display.DisplayNWPHeader(selo.week));
 
         const contracts = selo.contracts.GetAllContracts();
         const txt_contracts = display.DisplayContracts(contracts, false);
@@ -255,17 +234,17 @@ function Game(){
         const planned_buildings = selo.buildings.GetPlanned();
         const txt_planned = display.DisplayPlannedBuildings(planned_buildings, false);
         const next_week_balance = selo.balance + contract_profit - costs_total;
-        const txt_next_week_balance = display.ShowNWPNextWeekBalance(next_week_balance)
+        const txt_next_week_balance = display.DisplayNWPNextWeekBalance(next_week_balance)
         let txt_error = "";
         DisableNextWeekBut(false)
         if(costs_construction > selo.balance - costs_mainmans - costs_workers){
-            txt_error += display.ShowErrorCosts();
+            txt_error += display.DisplayErrorCosts();
             DisableNextWeekBut(true);
         }
         const days_of_week = 7;
         const max_build_days = days_of_week * builders_count;
         if(time_construction > max_build_days){
-            txt_error += display.ShowNWPErrorBuilders(builders_count, time_construction, max_build_days);
+            txt_error += display.DisplayNWPErrorBuilders(builders_count, time_construction, max_build_days);
             DisableNextWeekBut(true);
         }
         content += txt_balance;
@@ -278,7 +257,7 @@ function Game(){
         UpdateCollapsible();
     }
     this.OnNextWeekCalculate = function (){
-
+        NextWeek();
     }
     function DisableNextWeekBut(disable) {
         if(disable){

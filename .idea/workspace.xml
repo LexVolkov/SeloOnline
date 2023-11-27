@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/build/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/builder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/db_settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/db_settings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/display.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/offers/portfolio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/portfolio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/partys/duma.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/partys/duma.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jQuery.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jQuery.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +22,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="LexVolkov &lt;82153427+lexvolkov@users.noreply.github.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -96,7 +97,7 @@
       <workItem from="1701011879639" duration="14982000" />
       <workItem from="1701027049317" duration="368000" />
       <workItem from="1701027536648" duration="7591000" />
-      <workItem from="1701035224997" duration="5520000" />
+      <workItem from="1701035224997" duration="9612000" />
     </task>
     <task id="LOCAL-00002" summary="new">
       <option name="closed" value="true" />
@@ -114,11 +115,30 @@
       <option name="project" value="LOCAL" />
       <updated>1701028180675</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="refactoring">
+      <option name="closed" value="true" />
+      <created>1701043525948</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701043525948</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactoring CalculateBalance">
+      <option name="closed" value="true" />
+      <created>1701044026142</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701044026142</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -132,19 +152,24 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="new" />
     <MESSAGE value="new2" />
-    <option name="LAST_COMMIT_MESSAGE" value="new2" />
+    <MESSAGE value="refactoring" />
+    <MESSAGE value="refactoring CalculateBalance" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring CalculateBalance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/game/game.js</url>
-          <line>180</line>
+          <line>159</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

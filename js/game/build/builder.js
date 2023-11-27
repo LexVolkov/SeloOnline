@@ -119,15 +119,24 @@ function Builder() {
         if (homeplace.eliteplaces > population) {
             eliteplaces = population;
         }
-        //TODO Сделать подсчет в зависимости от зп
+        //TODO-- Доделать!!! Чтобы он считал каждое жилье по разному
         return { total: homeowners, homeless: homeless, barraks: barraks, eliteplaces: eliteplaces };
     }
-    this.Build = function (selo, planned_buildings) {
-        if (planned_buildings.length > 0) {
-            for (var a in planned_buildings) {
-                this.AddBuilding(planned_buildings[a]);
+    this.Build = function () {
+        built.push(...planned);
+        planned.length = 0;
+    }
+    this.DisableBuildingsWithoutWorkers = function(population) {
+        const work = this.Work(population);
+        let workers = work.workers;
+        for (const building in built) {
+            if (building.active) {
+                if (workers >= building.workerplace) {
+                    workers = workers - building.workerplace;
+                } else {
+                    building.active = false;
+                }
             }
-
         }
     }
     this.CheckRequirements = function (requirements) {

@@ -61,7 +61,7 @@ $(document).ready(function(){
         //const welcome = new Welcome(game);
 
 
-        const startBalance = 1000;
+        const startBalance = 10000;
         const startBuildings = ["silrada","house_of_builders", "stable", "wheat"];
         game.InitGame(startBalance, startBuildings);
         game.Start();
