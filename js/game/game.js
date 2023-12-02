@@ -1,22 +1,29 @@
+//TODO события в мире после перелистывания недели
+//TODO первоначальная страница
+//TODO нападение бандитов
+//TODO виды жилья
+//TODO сохранение данных
 function Game(){
 	let selo = {};
     let f_initGame = false;
     const display = new Display();
-
+    const events = new Journal();
+    let previous_population = 0;
     this.InitGame = function (startBalance, startBuildings) {
         selo = new Selo(startBalance, new Builder(), new Duma(), new Portfolio(),  new Offers());
         startBuildings.forEach((b) => {selo.buildings.AddBuildingFromKey(b);})
-
+        previous_population = selo.partys.Population();
         f_initGame = true;
     }
     this.Start = function (){
         UpdateWeek();
     }
     function NextWeek() {
+        const population = selo.partys.Population();
+        previous_population = population;
         selo.week++;
         selo.balance = CalculateBalance();
         selo.buildings.Build();
-        const population = selo.partys.Population();
         selo.buildings.DisableBuildingsWithoutWorkers(population);
         selo.contracts.DecreaseContractPeriod();
         const joylvl_total = CalculateTotalHappiness().joylvl_total;
@@ -24,11 +31,27 @@ function Game(){
         UpdateWeek()
     }
     function UpdateWeek() {
-        $(GV.ID_PAGE_WEEK_HEADER).html(display.DisplayMainPageTitle(selo.week));
         UpdateData();
         UpdateInfo();
+        MakeDestiny();
     }
+    function MakeDestiny(){
+        const population = selo.partys.Population();
+        const selo_data = {};
+        selo_data.week = selo.week;
+        selo_data.money = selo.balance;
+        selo_data.production = GetCurrentProduction();
+        selo_data.army = GetCurrentArmy();
+        selo_data.migration = population - previous_population;
+        selo_data.joylvl = CalculateTotalHappiness();
+        const current_events = events.GetEvents(selo_data);
+        if(current_events.length > 0){
+            current_events.forEach((event)=>{
+                console.log(event.message)
+            })
+        }
 
+    }
     function CalculateBalance() {
         let result = selo.balance;
         const population = selo.partys.Population();
@@ -47,6 +70,7 @@ function Game(){
         selo.offers.UpdateContracts(selo.week);
     }
     function UpdateInfo() {
+        ShowHeader();
         ShowPeopleInfo();
         ShowHomeownersInfo();
         ShowArmyInfo();
@@ -59,6 +83,9 @@ function Game(){
         ShowBuildingInfo();
         ShowOffersInfo();
 
+    }
+    function ShowHeader() {
+        $(GV.ID_PAGE_WEEK_HEADER).html(display.DisplayMainPageTitle(selo.week));
     }
     function ShowPeopleInfo() {
         const population = selo.partys.Population();
@@ -86,12 +113,17 @@ function Game(){
         UpdateCollapsible();
     }
     function ShowArmyInfo() {
+        const army = GetCurrentArmy();
+        const header = army.protection + "/" + army.cossacks + "/" + army.guns;
+        $(GV.ID_IFNO_ARMY).html(display.DisplayArmy(header, army.protection, army.cossacks, army.guns));
+        UpdateCollapsible()
+    }
+    function GetCurrentArmy() {
         const protection = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_PROTECTION);
         const cossacks = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_COSSACKS);
         const guns = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_GUNS);
-        const header = protection + "/" + cossacks + "/" + guns;
-        $(GV.ID_IFNO_ARMY).html(display.DisplayArmy(header, protection, cossacks, guns));
-        UpdateCollapsible()
+
+        return {protection:protection, cossacks:cossacks, guns:guns}
     }
     function ShowJoyInfo() {
         const total_happiness = CalculateTotalHappiness()
@@ -152,14 +184,17 @@ function Game(){
         UpdateCollapsible();
     }
     function ShowProductionInfo() {
+        $(GV.ID_IFNO_PRODUCTION).html(display.DisplayProductions(GetCurrentProduction()));
+        UpdateCollapsible();
+    }
+    function GetCurrentProduction() {
         let arr_data = [];
         for (var prod in PRODUCTIONS) {
             const total = selo.buildings.CalculateTotalProd(PRODUCTIONS[prod]);
             const title =  PRODUCTIONS[prod].tittle;
             if (total > 0)arr_data.push({title:title, value:total});
         }
-        $(GV.ID_IFNO_PRODUCTION).html(display.DisplayProductions(arr_data));
-        UpdateCollapsible();
+        return arr_data;
     }
     function ShowPartysInfo() {
         const population = selo.partys.Population();
