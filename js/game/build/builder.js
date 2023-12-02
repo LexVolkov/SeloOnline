@@ -3,58 +3,53 @@ function Builder() {
     let built = [];
     let planned = [];
 
-    this.GetBiuld = function (){
+    this.GetActiveBuildings = function (){
+        return built.filter(structure => structure.active).map(structure => structure.building);
+    }
+    this.GetDeActiveBuildings = function (){
+        return built.filter(structure => !structure.active).map(structure => structure.building);
+    }
+    this.GetConstructs = function (){
         return built;
     }
     this.GetPlanned = function (){
         return planned;
     }
 
-    this.AddBuilding = function (building_key){
-        built.push(db_buildings[building_key]);
+    this.AddBuildingFromKey = function (building_key){
+        this.AddBuilding(db_buildings[building_key]);
     }
-
+    this.AddBuilding = function (building){
+        built.push(new Structure(building));
+    }
     this.TotalWorkerplace = function() {
-        return built.reduce((total, prop) => {
+        return built.reduce((total, structure) => {
             let sum = 0;
-            if (prop.active) {
-                sum = prop.workerplace;
+            if (structure.active) {
+                sum = structure.building.workerplace;
             }
             return total + sum;
         }, 0);
     }
-    this.TotalWorkerSalary = function() {
-        return built.reduce((total, prop) => {
-            let sum = 0;
-            if (prop.active) {
-                sum = prop.workerSalary;
-            }
+    this.TotalPlannedBuildPrice = function() {
+        let sum = 0;
+        return planned.reduce((total, building) => {
+            sum = building.price;
             return total + sum;
         }, 0);
     }
-    this.PlannedBuildPrice = function() {
-        return planned.reduce((total, prop) => {
-            let sum = 0;
-            if (prop.active) {
-                sum = prop.price;
-            }
-            return total + sum;
-        }, 0);
-    }
-    this.PlannedBuildTime = function() {
-        return planned.reduce((total, prop) => {
-            let sum = 0;
-            if (prop.active) {
-                sum = prop.constructionTime;
-            }
+    this.TotalPlannedBuildTime = function() {
+        let sum = 0;
+        return planned.reduce((total, building) => {
+            sum = building.constructionTime;
             return total + sum;
         }, 0);
     }
     this.CalculateTotalBuildPar = function(property) {
-        return built.reduce((total, prop) => {
+        return built.reduce((total, structure) => {
             let sum = 0;
-            if (prop.active) {
-                sum = prop.parameters[property];
+            if (structure.active) {
+                sum = structure.building.parameters[property];
             }
             return total + sum;
         }, 0);
@@ -71,27 +66,26 @@ function Builder() {
         return { workers: workers, unemployment: unemployment };
     }
     this.HomePlaces = function () {
-        const totalWorkerHomePlace = built.reduce((total, building) => {
-            return total + building.parameters.workerhomes;
-        }, 0);
-        const totalFamilyHomePlace = built.reduce((total, building) => {
-            return total + building.parameters.familyhomes;
-        }, 0);
-        const totalEliteHomePlace = built.reduce((total, building) => {
-            return total + building.parameters.elitephomes;
-        }, 0);
+        const totals = built.reduce((total, structure) => {
+            const params = structure.building.parameters;
+            total.workerplaces += params.workerhomes;
+            total.familyplaces += params.familyhomes;
+            total.eliteplaces += params.elitehomes;
+            return total;
+        }, { workerplaces: 0, familyplaces: 0, eliteplaces: 0 });
 
-        return { workerplaces: totalWorkerHomePlace, familyplaces: totalFamilyHomePlace, eliteplaces: totalEliteHomePlace };
-    }
+        return totals;
+    };
     this.WorkersCosts = function (population) {
         const work = this.Work(this.TotalWorkerplace(), population);
         let workers = work.workers;
-        return built.reduce((total, prop) => {
+        return built.reduce((total, structure) => {
+            const building = structure.building;
             let sum = 0;
-            if (prop.active) {
-                if (workers >= prop.workerplace) {
-                    sum = prop.workerplace * prop.workerSalary;
-                    workers = workers - prop.workerplace;
+            if (building.active) {
+                if (workers >= building.workerplace) {
+                    sum = building.workerplace * building.workerSalary;
+                    workers = workers - building.workerplace;
                 }
             }
             return total + sum / 4;
@@ -123,18 +117,20 @@ function Builder() {
         return { total: homeowners, homeless: homeless, barraks: barraks, eliteplaces: eliteplaces };
     }
     this.Build = function () {
-        built.push(...planned);
+        planned.forEach(building => this.AddBuilding(building));
         planned.length = 0;
     }
     this.DisableBuildingsWithoutWorkers = function(population) {
         const work = this.Work(population);
         let workers = work.workers;
-        for (const building in built) {
-            if (building.active) {
+        for (const i in built) {
+            const structure = built[i];
+            const building = structure.building;
+            if (structure.active) {
                 if (workers >= building.workerplace) {
                     workers = workers - building.workerplace;
                 } else {
-                    building.active = false;
+                    structure.active = false;
                 }
             }
         }
@@ -149,19 +145,23 @@ function Builder() {
         }
         return true;
     }
-    this.CheckIfSingleBuildingExist = function (building_key, f_planned = false){
-        return f_planned?planned.includes(db_buildings[building_key]):built.includes(db_buildings[building_key]);
-
-    }
+    this.CheckIfSingleBuildingExist = function (building_key, f_planned = false) {
+        const building = db_buildings[building_key];
+        if (f_planned) {
+            return planned.includes(building);
+        } else {
+            return built.some(structure => structure.building === building);
+        }
+    };
     this.AddPlannedBuilding = function (key) {
         planned.push(db_buildings[key]);
     }
 
-    this.DeactivateBuilding = function(index) {
-        built[index].active = false;
+    this.DeactivateBuilding = function(bid) {
+        built.forEach((structure)=>{if(structure.id===bid)structure.active=false});
     }
-    this.ActivateBuilding = function(index) {
-        built[index].active = true;
+    this.ActivateBuilding = function(bid) {
+        built.forEach((structure)=>{if(structure.id===bid)structure.active=true});
     }
 
     this.DeletePlannedBuild = function(index) {
@@ -174,10 +174,10 @@ function Builder() {
         if (requirements) {
             par_name = GV.BUILD_PAR_REQUIREMENTS;
         }
-        return built.reduce((total, prop) => {
+        return built.reduce((total, structure) => {
             let sum = 0;
-            if (prop.active) {
-                prop[par_name].forEach(function (self_product) {
+            if (structure.active) {
+                structure.building[par_name].forEach(function (self_product) {
                     if (self_product === target_product) {
 
                         sum += self_product.base_amount;

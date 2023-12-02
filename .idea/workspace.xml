@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/js/game/build/class_structure.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/build/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/builder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/db_settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/db_settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/build/class_building.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/class_building.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/build/class_building_parameters.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/class_building_parameters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/build/db_buildings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/db_buildings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/display.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/offers/class_contract.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/class_contract.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/offers/db_contracts_rules.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/db_contracts_rules.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/offers/offers.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/offers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/offers/portfolio.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/portfolio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/partys/duma.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/partys/duma.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/jQuery.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jQuery.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,22 +69,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "G:/Мой диск/Shared_PC/MY_PROJECT/SeloOnline",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editing.templates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/Мій диск/Shared_PC/MY_PROJECT/SeloOnline&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -104,6 +102,9 @@
       <workItem from="1701027049317" duration="368000" />
       <workItem from="1701027536648" duration="7591000" />
       <workItem from="1701035224997" duration="24080000" />
+      <workItem from="1701062172003" duration="154000" />
+      <workItem from="1701463899208" duration="44000" />
+      <workItem from="1701516813590" duration="12306000" />
     </task>
     <task id="LOCAL-00002" summary="new">
       <option name="closed" value="true" />
@@ -145,7 +146,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701047508713</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="та много чего изменил.">
+      <option name="closed" value="true" />
+      <created>1701062267404</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701062267404</updated>
+    </task>
+    <task id="LOCAL-00008" summary="сделал прирост населения">
+      <option name="closed" value="true" />
+      <created>1701062303677</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701062303677</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,6 +193,8 @@
     <MESSAGE value="new2" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="refactoring CalculateBalance" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring CalculateBalance" />
+    <MESSAGE value="та много чего изменил." />
+    <MESSAGE value="сделал прирост населения" />
+    <option name="LAST_COMMIT_MESSAGE" value="сделал прирост населения" />
   </component>
 </project>

@@ -5,6 +5,7 @@
     'js/game/build/class_building.js',
     'js/game/build/class_building_parameters.js',
     'js/game/build/db_buildings.js',
+    'js/game/build/class_structure.js',
     'js/game/offers/class_contract.js',
     'js/game/offers/class_contragent.js',
     'js/game/offers/class_rule.js',

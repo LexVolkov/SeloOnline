@@ -2,7 +2,7 @@ class Building_parameters {
     constructor() {
         this.workerhomes = 0;
         this.familyhomes = 0;
-        this.elitephomes = 0;
+        this.elitehomes = 0;
         this.caravan = 0;
         this.builders = 0;
         this.happiness = 0;

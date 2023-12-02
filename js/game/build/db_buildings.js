@@ -12,12 +12,13 @@ function Buildings(){
     price:0,
     workerplace:7,
     workerSalary:50,
-    description:"Головний будинок же живуть та працюють міністри.",
+    description:"Головний будинок де живуть та працюють міністри. Дає один рівень щастя партій та 7 елітних місць для проживання міністрам.",
     parameters:new Building_parameters(),
     production:[],
     requirements:[]});
 
-  buildings.silrada.parameters.elitephomes = GV.BUILD_BASE_SILRADA_RESIDENTS;
+  buildings.silrada.parameters.elitehomes = GV.BUILD_BASE_SILRADA_RESIDENTS;
+  buildings.silrada.parameters.happiness = 1;
 
 
   buildings.brracks = new Building({
@@ -65,7 +66,7 @@ function Buildings(){
     production:[],
     requirements:[]});
 
-  buildings.farmstead.parameters.elitephomes = GV.BUILD_BASE_FARMSTEAD_RESIDENTS;
+  buildings.farmstead.parameters.elitehomes = GV.BUILD_BASE_FARMSTEAD_RESIDENTS;
 
 
   buildings.stable = new Building({

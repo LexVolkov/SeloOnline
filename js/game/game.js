@@ -5,7 +5,7 @@ function Game(){
 
     this.InitGame = function (startBalance, startBuildings) {
         selo = new Selo(startBalance, new Builder(), new Duma(), new Portfolio(),  new Offers());
-        startBuildings.forEach((b) => {selo.buildings.AddBuilding(b);})
+        startBuildings.forEach((b) => {selo.buildings.AddBuildingFromKey(b);})
 
         f_initGame = true;
     }
@@ -17,7 +17,7 @@ function Game(){
         selo.balance = CalculateBalance();
         selo.buildings.Build();
         const population = selo.partys.Population();
-        selo.buildings.DisableBuildingsWithoutWorkers(population);//TODO работает?
+        selo.buildings.DisableBuildingsWithoutWorkers(population);
         selo.contracts.DecreaseContractPeriod();
         const joylvl_total = CalculateTotalHappiness().joylvl_total;
         selo.partys.UpdatePopulation(joylvl_total);
@@ -33,7 +33,7 @@ function Game(){
         let result = selo.balance;
         const population = selo.partys.Population();
         const contract_profit = selo.contracts.GetProfitOnThisWeek();
-        const costs_construction = selo.buildings.PlannedBuildPrice();
+        const costs_construction = selo.buildings.TotalPlannedBuildPrice();
         const costs_mainmans = selo.partys.MinistersCosts();
         const costs_workers = selo.buildings.WorkersCosts(population);
         const costs_total = costs_construction+costs_mainmans+costs_workers;
@@ -62,13 +62,14 @@ function Game(){
     }
     function ShowPeopleInfo() {
         const population = selo.partys.Population();
+        const workerplaces = selo.buildings.TotalWorkerplace()
         const work = selo.buildings.Work(population);
         const workers = work.workers;
         const unemployment = (work.unemployment / population * 100).toFixed(0) + "%";
         const homeowners = selo.buildings.Homeowners(population);
         const homeowners_total = homeowners.total;
         const homeless = ((homeowners.homeless / population) * 100).toFixed(0) + "%";
-        $(GV.ID_IFNO_PEOPLE).html(display.DisplayPeople(population, workers, unemployment, homeowners_total, homeless));
+        $(GV.ID_IFNO_PEOPLE).html(display.DisplayPeople(population, workerplaces, workers, unemployment, homeowners_total, homeless));
         UpdateCollapsible();
     }
     function ShowHomeownersInfo() {
@@ -96,7 +97,7 @@ function Game(){
         const total_happiness = CalculateTotalHappiness()
         $(GV.ID_IFNO_JOYLVL).html(display.DisplayJoy(
             total_happiness.joylvl_total,
-            total_happiness.joylvl_unemployeds,//TODO безробітні 1.5 при 0%?
+            total_happiness.joylvl_unemployeds,
             total_happiness.joylvl_homeless,
             total_happiness.joylvl_parties,
             total_happiness.joylvl_buildings));
@@ -124,15 +125,15 @@ function Game(){
         $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance));
     }
     function CalculateHomelessJoyLvl(homeless) {
-        return homeless > 90 ? -1 : homeless > 75 ? -0.75 : homeless > 50 ? -0.5 : homeless > 25 ? -0.25 : homeless > 1 ? 0 : 1.5;
+        return homeless > 90 ? -1 : homeless > 75 ? -0.75 : homeless > 50 ? -0.5 : homeless > 25 ? -0.25 : homeless > 1 ? 0 : 1;
     }
     function CalculateUnemploymentJoyLvl(unemployment) {
-        return unemployment > 90 ? -1 : unemployment > 75 ? -0.75 : unemployment > 50 ? -0.5 : unemployment > 25 ? -0.25 : unemployment > 1 ? 0 : 1.5;
+        return unemployment > 90 ? -1 : unemployment > 75 ? -0.75 : unemployment > 50 ? -0.5 : unemployment > 25 ? -0.25 : unemployment > 1 ? 0 : 1;
     }
 
     function ShowCostsInfo() {
         const population = selo.partys.Population();
-        const costs_construction = selo.buildings.PlannedBuildPrice();
+        const costs_construction = selo.buildings.TotalPlannedBuildPrice();
         const costs_mainmans = selo.partys.MinistersCosts();
         const costs_workers = selo.buildings.WorkersCosts(population);
         const costs_total = costs_construction+costs_mainmans+costs_workers;
@@ -168,9 +169,9 @@ function Game(){
         UpdateCollapsible();
     }
     function  ShowBuildingInfo(){
-        const built_buildings = selo.buildings.GetBiuld();
-        $(GV.ID_IFNO_BUILD_ACTIVE).html(display.DisplayActiveBuildings(built_buildings));
-        $(GV.ID_IFNO_BUILD_DEACTIVE).html(display.DisplayDeActiveBuildings(built_buildings));
+        const constructs = selo.buildings.GetConstructs();
+        $(GV.ID_IFNO_BUILD_ACTIVE).html(display.DisplayBuildings(constructs, true));
+        $(GV.ID_IFNO_BUILD_DEACTIVE).html(display.DisplayBuildings(constructs, false));
         const planned_buildings = selo.buildings.GetPlanned();
         $(GV.ID_IFNO_BUILD_PLANNED).html(display.DisplayPlannedBuildings(planned_buildings));
         UpdateCollapsible();
@@ -194,11 +195,20 @@ function Game(){
     }
     this.OnDeActivateBuilding = function (i){
         selo.buildings.DeactivateBuilding(i);
+        const population = selo.partys.Population();
+        selo.buildings.DisableBuildingsWithoutWorkers(population);
+        ShowPeopleInfo();
         ShowBuildingInfo();
+        ShowJoyInfo();
+
     }
     this.OnActivateBuilding = function (i){
         selo.buildings.ActivateBuilding(i);
+        const population = selo.partys.Population();
+        selo.buildings.DisableBuildingsWithoutWorkers(population);
+        ShowPeopleInfo();
         ShowBuildingInfo();
+        ShowJoyInfo();
     }
     this.OnDeletePlannedBuilding = function (i){
         selo.buildings.DeletePlannedBuild(i);
@@ -207,9 +217,6 @@ function Game(){
     }
 
     function ShowOffersInfo(){
-        const built_buildings = selo.buildings.GetBiuld();
-        display.DisplayActiveBuildings(built_buildings);
-        display.DisplayDeActiveBuildings(built_buildings);
         const offers = selo.offers.GetOffersList();
         const contract_count = selo.contracts.GetContractCount();
         const caravans_count = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_CARAVAN);
@@ -253,8 +260,8 @@ function Game(){
         const txt_balance = display.DisplayBalance(selo.balance);
 
         const population = selo.partys.Population();
-        const costs_construction = selo.buildings.PlannedBuildPrice();
-        const time_construction = selo.buildings.PlannedBuildTime();
+        const costs_construction = selo.buildings.TotalPlannedBuildPrice();
+        const time_construction = selo.buildings.TotalPlannedBuildTime();
         const costs_mainmans = selo.partys.MinistersCosts();
         const costs_workers = selo.buildings.WorkersCosts(population);
         const costs_total = costs_construction+costs_mainmans+costs_workers;

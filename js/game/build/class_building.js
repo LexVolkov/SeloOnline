@@ -1,6 +1,5 @@
 class Building {
     constructor(par) {
-        this.id = 0;
         this.title = par.title;
         this.description = par.description;
         this.type = par.type;
@@ -12,6 +11,5 @@ class Building {
         this.parameters = par.parameters;
         this.production = par.production;
         this.requirements = par.requirements;
-        this.active = true;
     }
-};
+}

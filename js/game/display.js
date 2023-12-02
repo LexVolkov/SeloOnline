@@ -28,9 +28,10 @@ function Display() {
         }
         return content;
     }
-    this.DisplayPeople = function (population, workers, unemployment, homeowners, homeless) {
+    this.DisplayPeople = function (population, workerplaces, workers, unemployment, homeowners, homeless) {
         const header = `Населення: ${population}`;
         const arr_data = [
+            { title: "Робочих місць: ", value: workerplaces },
             { title: "Працюють: ", value: workers },
             { title: "Безробіття: ", value: unemployment},
             { title: "Мають дім: ", value: homeowners },
@@ -123,34 +124,22 @@ function Display() {
         arr_colset_data.forEach((data)=>col_content += CreateCollapsible(data.title, data.arr_data))
         return CreateCollapsibleset(col_content, header);
     }
-    this.DisplayActiveBuildings = function (buildings) {
-        let count = 0;
+    this.DisplayBuildings = function (constructs, actived) {
         let arr_colset_data = [];
-        for (let i = 0; i <buildings.length; i++) {
-            const building = buildings[i];
-            if(building.active === true){
-                const but = `<a onclick="game.OnDeActivateBuilding(${i})" href="#" class="ui-btn ui-mini ui-btn-inline ui-icon-back ui-btn-icon-left">Відключити</a>`;
+        for (let i = 0; i <constructs.length; i++) {
+            const construct = constructs[i];
+            const building = construct.building;
+            const func = actived?"OnDeActivateBuilding":"OnActivateBuilding";
+            const txt = actived?"Відключити":"Запустити";
+            const but = `<a onclick="game.${func}(${construct.id})" href="#" 
+                class="ui-btn ui-mini ui-btn-inline ui-icon-back ui-btn-icon-left">
+                ${txt}</a>`;
+            if(construct.active === actived){
                 arr_colset_data.push(GetBuildingDescritopn(building, but))
-                count++;
             }
         }
-        const header = `Активні (${count})`;
-        let col_content = "";
-        arr_colset_data.forEach((data)=>col_content += CreateCollapsible(data.title, data.arr_data))
-        return CreateCollapsibleset(col_content, header);
-    }
-    this.DisplayDeActiveBuildings = function (buildings) {
-        let count = 0;
-        let arr_colset_data = [];
-        for (let i = 0; i <buildings.length; i++) {
-            const building = buildings[i];
-            if(building.active === false){
-                const but = `<a onclick="game.OnActivateBuilding(${i})" href="#" class="ui-btn ui-mini ui-btn-inline ui-icon-back ui-btn-icon-left">Запустити</a>`;
-                arr_colset_data.push(GetBuildingDescritopn(building, but))
-                count++;
-            }
-        }
-        const header = `Відключені (${count})`;
+        const count = arr_colset_data.length;
+        const header = actived?`Активні (${count})`:`Відключені (${count})`;
         let col_content = "";
         arr_colset_data.forEach((data)=>col_content += CreateCollapsible(data.title, data.arr_data))
         return CreateCollapsibleset(col_content, header);
