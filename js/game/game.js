@@ -1,11 +1,10 @@
-//TODO события в мире после перелистывания недели
 //TODO первоначальная страница
-//TODO нападение бандитов
 //TODO виды жилья
 //TODO сохранение данных
 //TODO налоги с работников
 //TODO кредит
-//
+//TODO убрать журнал в колапс на главной странице
+//TODO !!!!!!!!!!!! нужно рагрузить обьект selo, чтобы там были только данные.
 function Game(){
 	let selo = {};
     let f_initGame = false;
@@ -17,6 +16,7 @@ function Game(){
         startBuildings.forEach((b) => {selo.buildings.AddBuildingFromKey(b);})
         previous_population = selo.partys.Population();
         f_initGame = true;
+        console.log(selo)
     }
     this.Start = function (){
         UpdateWeek();
@@ -87,6 +87,13 @@ function Game(){
 
     function UpdateData() {
         selo.offers.UpdateContracts(selo.week);
+        localforage.setItem(GV.DB_STORE_NAME, selo)
+            .then(() => {
+                console.log('Игра успешна сохранена.');
+            })
+            .catch(err => {
+                console.error('Ошибка при сохранении игры:', err);
+            });
     }
     function UpdateInfo() {
         ShowHeader();
@@ -102,6 +109,27 @@ function Game(){
         ShowBuildingInfo();
         ShowOffersInfo();
 
+    }
+    this.ShowStartSettings = function(){
+        //const db_buildings = selo.buildings.GetGroupedArray();
+        $(GV.ID_NEW_GAME).html(display.DisplayStartSettings());
+        //$(GV.ID_NEW_GAME).html(display.DisplayStartSettings(display.UpdateBuildingList(db_buildings, CheckProductRequirements, CheckIfSingleBuildingExist, this.OnAddStartBuilding)));
+        $.mobile.navigate(GV.ID_PAGE_NEW_GAME);
+    }
+    this.StartGame = function (){
+        const startBalance =  Number($(GV.ID_START_BALANCE).val());
+        const startBuildings = ["silrada","house_of_builders", "stable", "wheat"];
+        this.InitGame(startBalance, startBuildings);
+        this.Start();
+    }
+    this.OnAddStartBuilding = function (building_key){
+        selo.buildings.AddPlannedBuilding(building_key);
+    }
+    this.LoadGame = function (data){
+        selo = data;
+        previous_population = selo.partys.Population();
+        f_initGame = true;
+        UpdateInfo();
     }
     function ShowHeader() {
         $(GV.ID_PAGE_WEEK_HEADER).html(display.DisplayMainPageTitle(selo.week));
@@ -187,7 +215,6 @@ function Game(){
         const costs_construction = selo.buildings.TotalPlannedBuildPrice();
         const costs_mainmans = selo.partys.MinistersCosts();
         const costs_workers = selo.buildings.WorkersCosts(population);
-        console.log(costs_workers)
         const costs_total = costs_construction+costs_mainmans+costs_workers;
         $(GV.ID_IFNO_COSTS).html(display.DisplayCosts(costs_total, costs_workers, costs_mainmans, costs_construction));
         UpdateCollapsible();
@@ -233,7 +260,7 @@ function Game(){
     }
     this.OnOpenBuildingList = function(){
         const db_buildings = selo.buildings.GetGroupedArray();
-        $(GV.ID_IFNO_BUILDINGS_LIST).html(display.UpdateBuildingList(db_buildings, CheckProductRequirements, CheckIfSingleBuildingExist));
+        $(GV.ID_IFNO_BUILDINGS_LIST).html(display.UpdateBuildingList(db_buildings, CheckProductRequirements, CheckIfSingleBuildingExist, this.OnAddPlannedBuilding));
         UpdateCollapsible();
     }
     function CheckIfSingleBuildingExist(building, f_planned = false){

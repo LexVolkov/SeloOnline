@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="">
+    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="добавил страничку для вывода событий">
+      <change beforePath="$PROJECT_DIR$/.idea/SeloOnline.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SeloOnline.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/build/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/builder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/db_settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/db_settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/display.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/jQuery.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jQuery.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +56,9 @@
     <setting file="file://$PROJECT_DIR$/js/game/welcome.js" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/js/jQuery.js" root0="SKIP_INSPECTION" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -65,22 +73,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/Мій диск/Shared_PC/MY_PROJECT/SeloOnline&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "G:/Мій диск/Shared_PC/MY_PROJECT/SeloOnline",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editing.templates",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -102,7 +113,7 @@
       <workItem from="1701463899208" duration="44000" />
       <workItem from="1701516813590" duration="19379000" />
       <workItem from="1701560270531" duration="182000" />
-      <workItem from="1701624949302" duration="15865000" />
+      <workItem from="1701624949302" duration="22086000" />
     </task>
     <task id="LOCAL-00002" summary="new">
       <option name="closed" value="true" />
@@ -184,7 +195,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701640441352</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="добавил страничку для вывода событий">
+      <option name="closed" value="true" />
+      <created>1701641068179</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701641068179</updated>
+    </task>
+    <task id="LOCAL-00013" summary="добавил страничку для вывода событий">
+      <option name="closed" value="true" />
+      <created>1701641347416</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701641347416</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +235,7 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>

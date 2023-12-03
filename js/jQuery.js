@@ -54,28 +54,45 @@ function loadScripts(scriptPaths, callback) {
 let game = {};
 $(document).ready(function(){
     if(window.location.pathname !== "/index.html") {
-
-        //$.mobile.navigate("#page_new_game");
-        $.mobile.navigate("#page_week");
-
+        $.mobile.navigate("#page_new_game");
     }
     loadScripts(scriptPaths, function() {
-        $('#div_new_game').html(`Загрузка скриптов завершена`);
+        $(GV.ID_NEW_GAME).html(`Загрузка скриптов завершена`);
         InitApp();
         PRODUCTIONS();
         game = new Game();
-        //const welcome = new Welcome(game);
 
+        localforage.getItem(GV.DB_STORE_NAME)
+            .then(data => {
+                if (data !== null) {
+                    // Если данные найдены, вызываем функцию LoadGame
+                    game.LoadGame(data);
+                } else {
+                    // Если данных нет, вызываем функцию ShowStartSettings
+                    game.ShowStartSettings();
+                }
+            })
+            .catch(err => {
+                console.error('Ошибка при попытке загрузить игру:', err);
+                // В случае ошибки также можно вызвать ShowStartSettings или обработать ошибку по-другому
+                game.ShowStartSettings();
+            });
 
+        //game.LoadGame(data);
+        //game.ShowStartSettings();
+
+/*
         const startBalance = 10000;
         const startBuildings = ["silrada","house_of_builders", "stable", "wheat"];
         game.InitGame(startBalance, startBuildings);
         game.Start();
+*/
 
-        //welcome.NewGamePage();
-        //Welcome.StartGame();
+
+
     });
 });
+
 function InitApp() {
     $(".footer_links").append(GV.FOOTER);
     $(".h4_footer_content").append(GV.COPYRIGHT).append('<br>').append(GV.VERSION);

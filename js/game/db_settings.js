@@ -88,6 +88,7 @@ GV.ID_BUT_NEXT_WEEK_DONE = "#but_next_week_done";
 GV.ID_PAGE_WEEK_HEADER = "#page_title";
 GV.ID_INFO_POPUP = "#popup_info";
 GV.ID_INFO_EVENTS = "#events_info";
+GV.ID_START_BALANCE = "#start_balance";
 
 GV.ID_PAGE_NEW_GAME = "#page_new_game";
 GV.ID_PAGE_WEEK = "#page_week";
@@ -98,3 +99,6 @@ GV.ID_PAGE_EVENTS= "#page_events";
 
 GV.ACTION_BALANCE = "action_change_balance";
 GV.ACTION_MIGRATION = "action_migrate";
+
+GV.DB_NAME = "SeloDB";
+GV.DB_STORE_NAME = "SeloSave";
