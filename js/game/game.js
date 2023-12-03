@@ -3,6 +3,9 @@
 //TODO нападение бандитов
 //TODO виды жилья
 //TODO сохранение данных
+//TODO налоги с работников
+//TODO кредит
+//
 function Game(){
 	let selo = {};
     let f_initGame = false;
@@ -20,7 +23,7 @@ function Game(){
     }
     function NextWeek() {
         const population = selo.partys.Population();
-        previous_population = population;
+
         selo.week++;
         selo.balance = CalculateBalance();
         selo.buildings.Build();
@@ -29,6 +32,7 @@ function Game(){
         const joylvl_total = CalculateTotalHappiness().joylvl_total;
         selo.partys.UpdatePopulation(joylvl_total);
         UpdateWeek()
+        previous_population = selo.partys.Population();
     }
     function UpdateWeek() {
         UpdateData();
@@ -41,16 +45,31 @@ function Game(){
         selo_data.week = selo.week;
         selo_data.money = selo.balance;
         selo_data.production = GetCurrentProduction();
-        selo_data.army = GetCurrentArmy();
+        const army = GetCurrentArmy();
+        selo_data.protection = army.protection;
+        selo_data.cossacks = army.cossacks;
+        selo_data.guns = army.guns;
         selo_data.migration = population - previous_population;
         selo_data.joylvl = CalculateTotalHappiness();
         const current_events = events.GetEvents(selo_data);
         if(current_events.length > 0){
+            $(GV.ID_INFO_EVENTS).html(display.DisplayEvents(current_events));
+            setTimeout(function() {
+                $.mobile.navigate(GV.ID_PAGE_EVENTS, {transition: "none"});
+            }, 250)
             current_events.forEach((event)=>{
-                console.log(event.message)
+                RunAction(event.event_action.action, event.event_action.value);
             })
         }
-
+    }
+    function RunAction(action, value){
+        if(action === GV.ACTION_BALANCE){
+            selo.balance += value;
+            ShowBalanceInfo();
+        }
+    }
+    this.OnCloseEventDialog =  function (){
+        $(GV.ID_POPUP_DIALOG_MAIN).popup("close");
     }
     function CalculateBalance() {
         let result = selo.balance;
@@ -168,6 +187,7 @@ function Game(){
         const costs_construction = selo.buildings.TotalPlannedBuildPrice();
         const costs_mainmans = selo.partys.MinistersCosts();
         const costs_workers = selo.buildings.WorkersCosts(population);
+        console.log(costs_workers)
         const costs_total = costs_construction+costs_mainmans+costs_workers;
         $(GV.ID_IFNO_COSTS).html(display.DisplayCosts(costs_total, costs_workers, costs_mainmans, costs_construction));
         UpdateCollapsible();
@@ -189,7 +209,7 @@ function Game(){
     }
     function GetCurrentProduction() {
         let arr_data = [];
-        for (var prod in PRODUCTIONS) {
+        for (const prod in PRODUCTIONS) {
             const total = selo.buildings.CalculateTotalProd(PRODUCTIONS[prod]);
             const title =  PRODUCTIONS[prod].tittle;
             if (total > 0)arr_data.push({title:title, value:total});
@@ -269,8 +289,9 @@ function Game(){
     this.OnOpenAddContractPopup = function(cid){
         const contract = selo.offers.GetContractFromCID(cid);
         if(contract !== undefined){
-            display.ShowAddContractPopUp(contract);
-            $(GV.ID_OFFER_POPUP_DIALOG).popup("open");
+            $(GV.ID_INFO_POPUP).html(display.ShowAddContractPopUp(contract));
+            $(GV.ID_PAGE_WEEK ).trigger('create');
+            $(GV.ID_POPUP_DIALOG_MAIN).popup("open");
         }else{
             console.error("Wrong cid:"+cid);
         }
@@ -282,6 +303,8 @@ function Game(){
         selo.offers.RemoveContract(contract);
         ShowContractInfo();
         ShowOffersInfo();
+        this.OnCloseEventDialog();
+
     }
     this.OnNextWeek = function (){
         let content = '';

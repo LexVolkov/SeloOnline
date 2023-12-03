@@ -56,8 +56,6 @@ function Builder() {
     }
     this.Work = function(population) {
         totalWorkerplaces = this.TotalWorkerplace();
-
-        population = Utility.CheckNumber(population);
         let workers = totalWorkerplaces;
         if (totalWorkerplaces > population) {
             workers = population;
@@ -77,19 +75,20 @@ function Builder() {
         return totals;
     };
     this.WorkersCosts = function (population) {
-        const work = this.Work(this.TotalWorkerplace(), population);
+        const work = this.Work(population);
         let workers = work.workers;
-        return built.reduce((total, structure) => {
+        let total_sum = built.reduce((total, structure) => {
             const building = structure.building;
             let sum = 0;
-            if (building.active) {
+            if (structure.active) {
                 if (workers >= building.workerplace) {
                     sum = building.workerplace * building.workerSalary;
                     workers = workers - building.workerplace;
                 }
             }
-            return total + sum / 4;
+            return total + sum;
         }, 0);
+        return total_sum / 4;
     }
     this.Homeowners = function (population) {
         const homeplace = this.HomePlaces();

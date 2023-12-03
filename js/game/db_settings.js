@@ -66,7 +66,7 @@ GV.ID_NEW_GAME = "#div_new_game";
 GV.ID_CONTRACT_SLIDER = "#contract_slider";
 GV.ID_OFFER_INFO = "#offer_info";
 GV.ID_OFFER_BUT = "#offer_but";
-GV.ID_OFFER_POPUP_DIALOG = "#popupDialog_offers";
+GV.ID_POPUP_DIALOG_MAIN = "#popup_dialog";
 
 GV.ID_IFNO_PEOPLE = "#people_info";
 GV.ID_IFNO_HOMEOWNERS = "#homeowners_info";
@@ -86,8 +86,15 @@ GV.ID_IFNO_NEXT_WEEK = "#div_next_week_info";
 GV.ID_IFNO_NEXT_WEEK_HEADER = "#next_week_header";
 GV.ID_BUT_NEXT_WEEK_DONE = "#but_next_week_done";
 GV.ID_PAGE_WEEK_HEADER = "#page_title";
+GV.ID_INFO_POPUP = "#popup_info";
+GV.ID_INFO_EVENTS = "#events_info";
 
 GV.ID_PAGE_NEW_GAME = "#page_new_game";
 GV.ID_PAGE_WEEK = "#page_week";
 GV.ID_PAGE_ADD_BUILDING = "#page_add_building";
 GV.ID_PAGE_NEXT_WEEK = "#page_next_week";
+GV.ID_PAGE_EVENTS= "#page_events";
+
+
+GV.ACTION_BALANCE = "action_change_balance";
+GV.ACTION_MIGRATION = "action_migrate";

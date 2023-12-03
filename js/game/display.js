@@ -1,4 +1,18 @@
 function Display() {
+    function CreateCollapsibleset(col_content, header = "", collapsed = true){//[{title:"",arr_data:[]}]
+        let content = "";
+        if(header !== ""){
+            content += `<div class="col" data-role="collapsible" data-collapsed="${collapsed}">`
+            content += `<h3 class="ui-bar ui-bar-b">${header}</h3>`;
+        }
+        content += `<div class="colset" data-role="collapsibleset" data-iconpos="left">`;
+        content += col_content;
+        content += '</div >';
+        if(header !== ""){
+            content += '</div >';
+        }
+        return content;
+    }
     function CreateCollapsible(header, arr_col_data, collapsed = true) {//[{title:"",value:0}]
         let content = "";
         content += `<div class="col" data-role="collapsible" data-collapsed="${collapsed}" align="left">`;
@@ -14,20 +28,6 @@ function Display() {
         return content;
     }
 
-    function CreateCollapsibleset(col_content, header = "", collapsed = true){//[{title:"",arr_data:[]}]
-        let content = "";
-        if(header !== ""){
-            content += `<div class="col" data-role="collapsible" data-collapsed="${collapsed}">`
-            content += `<h3 class="ui-bar ui-bar-b">${header}</h3>`;
-        }
-        content += `<div class="colset" data-role="collapsibleset" data-iconpos="left">`;
-        content += col_content;
-        content += '</div >';
-        if(header !== ""){
-            content += '</div >';
-        }
-        return content;
-    }
     this.DisplayPeople = function (population, workerplaces, workers, unemployment, homeowners, homeless) {
         const header = `Населення: ${population}`;
         const arr_data = [
@@ -247,7 +247,7 @@ function Display() {
                     const amount = contract.amount;
                     const price = contract.product.price;
                     const product_name = Warehouse.GetProductName(contract.product);
-                   let but = `<a href="#" onclick="game.OnOpenAddContractPopup(${contract.cid})">${addContract_butText}</a>`;
+                   let but = `<a href="#" data-role="none" onclick="game.OnOpenAddContractPopup(${contract.cid})">${addContract_butText}</a>`;
                     if (caravans_available) {
                         if (contragent.type === CONTRAGENT_TYPE.CITY && !have_mail) {
                             but = '<span style="color: rgb(128,128,128);">' + addContract_butText + '</span>';
@@ -272,16 +272,18 @@ function Display() {
         return CreateCollapsibleset(col_content)
     }
     this.ShowAddContractPopUp = function(contract) {
+        let content = `<h3>Договір</h3>`;
         let product = contract.product;
-        $(GV.ID_OFFER_INFO).html('Ви хочете заключити контракт на: <h4>' + product.tittle + '</h4> в розмірі: </br><h3>' + contract.amount + '</h3>');
+        content += `Ви хочете заключити контракт на: <h4> \"${product.tittle}\" </h4> в розмірі: </br><h3> ${contract.amount} [${GV.QCCOIN_PNG}${(contract.amount*contract.product.price)}] </h3>`;
+        content += `<p>На період:</p>`;
+        content += `<form>`;
+        content += `<label for="${GV.ID_CONTRACT_SLIDER.substring(1)}" >Slider:</label>`;
+        content += `<input type="range" name="${GV.ID_CONTRACT_SLIDER.substring(1)}" id="${GV.ID_CONTRACT_SLIDER.substring(1)}" min="${GV.MIN_CONTRACT_OFFER}" max="${GV.MAX_CONTRACT_OFFER}" value="${GV.MIN_CONTRACT_OFFER}" />`;
+        content += `</form>`;
+        content += `<a href="#" onclick="game.OnCloseEventDialog();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >Відміна</a>`;
+        content += `<a href="#" onclick="game.OnAddContract(${contract.cid})" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >Додати</a>`;
 
-        $(GV.ID_CONTRACT_SLIDER).attr("min", GV.MIN_CONTRACT_OFFER);
-        $(GV.ID_CONTRACT_SLIDER).attr("max", GV.MAX_CONTRACT_OFFER);
-        $(GV.ID_CONTRACT_SLIDER).attr("value", GV.MIN_CONTRACT_OFFER);
-
-        $(GV.ID_OFFER_BUT).html('<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Відміна</a>' +
-            `<a href="#" onclick="game.OnAddContract(${contract.cid})" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-rel="back">Додати</a>`
-        );
+        return content;
     }
     function ErrorDiv(error_text){
         return `<b style="color:#ff0000;">${error_text}</b>`;
@@ -305,4 +307,27 @@ function Display() {
     this.DisplayMainPageTitle = function(week){
         return (week + " тиждень");
     }
+    this.DisplayEvents = function (current_events){
+        let content = `<h3>Журнал подій</h3>`;
+        current_events.forEach((event)=>{
+            content += DisplayEvent("", event.message, event.data);
+        })
+        content += '';
+
+        return content;
+    }
+    function DisplayEvent(header, text, data){
+        let content = `<h4>${header}</h4>`;
+        content += `${text}`;
+        if(data.value !== ""){
+            content += '<div class="ui-grid-a">';
+            content +=
+                `<div class="ui-block-a"><div class="ui-bar ui-bar-b"><b>${data.title}</b></div></div> 
+                <div class="ui-block-b"><div class="ui-bar ui-bar-b">${data.value}</div></div> `;
+
+            content += '</div >';
+        }
+        return content;
+    }
+
 }

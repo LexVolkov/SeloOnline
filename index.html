@@ -21,11 +21,6 @@
             $("body>[data-role='panel']").panel();
         });
     </script>
-    <script id="toolbar-init" type="text/javascript">
-        $(function () {
-            $("body>[data-role='footer']").toolbar();
-        });
-    </script>
 
     <script src="js/jQuery.js" type="text/javascript"></script>
     
@@ -67,6 +62,11 @@
 
         <div role="main" class="ui-content" style="max-width: 500px;">
 
+            <div data-role="popup" id="popup_dialog" data-overlay-theme="b" data-theme="b" data-dismissible="true">
+                <div role="main" class="ui-content">
+                    <div id="popup_info"></div>
+                </div>
+            </div>
 
             <div id="people_info"></div>
 
@@ -92,22 +92,6 @@
 
             <div id="offers_info"></div>
 
-            <div data-role="popup" id="popupDialog_offers" data-overlay-theme="b" data-theme="b" data-dismissible="true">
-                <div data-role="header" data-theme="b">
-                    <h4>Договір</h4>
-                </div>
-                <div role="main" class="ui-content">
-                    <div id="offer_info"></div>
-                    <p>На період:</p>
-                    <div id="offer_slider"></div>
-                    <form>
-                        <label for="contract_slider" class="ui-hidden-accessible">Slider:</label>
-                        <input type="range" name="contract_slider" id="contract_slider" min="0" max="100" value="0" />
-                    </form>
-
-                    <div id="offer_but"></div>
-                </div>
-            </div>
 
 
             <h3 class="ui-bar ui-bar-b">
@@ -164,6 +148,24 @@
 
 </div><!-- /page -->
 
+<!--  -->
+<!-- SELO EVENT PAGE -->
+<!--  -->
+<div data-role="page" id="page_events" data-title="Selo Edition" align='center' class="ui-page-theme-b">
+    <div data-role="header">
+        <h1 id="Журнал подій"></h1>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content" style="max-width: 500px;">
+
+        <div id="events_info"></div>
+        <br/><a href="#page_week" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="none">Добре</a>
+
+    </div><!-- /content -->
+    <div data-role="footer" class="footer_links"></div><!-- /footer -->
+
+
+</div><!-- /page -->
     
   <!--
      <div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-theme="b">
