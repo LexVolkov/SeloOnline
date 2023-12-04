@@ -28,7 +28,6 @@
     'js/game/display.js',
     'js/game/game.js',
     'js/game/utility.js',
-    'js/game/welcome.js',
 ];
 function loadScripts(scriptPaths, callback) {
     let loadedScripts = 0;
@@ -77,19 +76,6 @@ $(document).ready(function(){
                 // В случае ошибки также можно вызвать ShowStartSettings или обработать ошибку по-другому
                 game.ShowStartSettings();
             });
-
-        //game.LoadGame(data);
-        //game.ShowStartSettings();
-
-/*
-        const startBalance = 10000;
-        const startBuildings = ["silrada","house_of_builders", "stable", "wheat"];
-        game.InitGame(startBalance, startBuildings);
-        game.Start();
-*/
-
-
-
     });
 });
 

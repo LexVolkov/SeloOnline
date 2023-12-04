@@ -1,13 +1,29 @@
 function Journal(){
-    const db_events = new Destiny().GetEvents();
+    let db_events = new Destiny().GetEvents();
+    this.GetEventsDbData = function (){
+        return db_events;
+    }
+    this.SetEventsDbData = function (data) {
+        db_events = data;
+    }
     this.GetEvents = function (selo_data){
         let arr_events = [];
         db_events.forEach((event)=>{
             let check_conditions = true;
             for (const cond_key in event.conditions) {
                 if(event.conditions[cond_key] !== undefined) {
-                   const check = CheckCondition(event.conditions[cond_key], selo_data[cond_key]);
-                    if(!check)check_conditions = false;
+                    if(cond_key === "week"){
+                        let f_week = false;
+                        event.conditions[cond_key].forEach((w) => {
+                            const check = event.conditions[cond_key][w] === selo_data[cond_key];
+                            if(check)f_week = true;
+                        });
+                        if(!f_week)check_conditions = false;
+                    }else{
+                        const check = CheckCondition(event.conditions[cond_key], selo_data[cond_key]);
+                        if(!check)check_conditions = false;
+                    }
+
                 }
             }
             if(check_conditions && event.event_action.action === GV.ACTION_MIGRATION ){
@@ -26,9 +42,8 @@ function Journal(){
                 }
                 event.data.value = GV.QCCOIN_PNG+event.event_action.value;
             }
-            if(check_conditions && event.loop>0){
+            if(check_conditions){
                 if(Math.random() < event.random){
-                    event.loop --;
                     arr_events.push(event);
                 }
             }

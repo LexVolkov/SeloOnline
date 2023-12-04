@@ -17,6 +17,7 @@ function Game(){
         f_initGame = true;
     }
     this.Start = function (){
+        $.mobile.navigate(GV.ID_PAGE_WEEK);
         previous_population = selo.partys.Population();
         UpdateWeek();
     }
@@ -86,7 +87,9 @@ function Game(){
         selo.offers.UpdateContracts(selo.week);
     }
     function SaveGame() {
-        localforage.setItem(GV.DB_STORE_NAME, PackSavedData(selo))
+        let data = {};
+        data.selo = PackSavedData(selo);
+        localforage.setItem(GV.DB_STORE_NAME, data)
             .then(() => {
                 console.log('Игра успешна сохранена.');
             })
@@ -140,11 +143,12 @@ function Game(){
         this.Start();
     }
     function UnPackSaveData(data) {
-        selo.week  = data.week;
-        selo.balance  = data.balance;
-        selo.buildings.SetConstructs(data.buildings);
-        selo.partys.SetPatrys(data.parties);
-        selo.contracts.SetContracts(data.contracts);
+        let selo_data = data.selo;
+        selo.week  = selo_data.week;
+        selo.balance  = selo_data.balance;
+        selo.buildings.SetConstructs(selo_data.buildings);
+        selo.partys.SetPatrys(selo_data.parties);
+        selo.contracts.SetContracts(selo_data.contracts);
     }
     function ShowHeader() {
         $(GV.ID_PAGE_WEEK_HEADER).html(display.DisplayMainPageTitle(selo.week));
