@@ -1,5 +1,5 @@
 function Duma() {
-    const parties = [new Party(GV.PARTY_TITLE_KOZAKS, "", "", GV.PARTY_START_MEMBERS_KOZAKS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
+    let parties = [new Party(GV.PARTY_TITLE_KOZAKS, "", "", GV.PARTY_START_MEMBERS_KOZAKS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
                     new Party(GV.PARTY_TITLE_FARMMANS, "", "", GV.PARTY_START_MEMBERS_FARMMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
                     new Party(GV.PARTY_TITLE_CHURCHMANS, "", "", GV.PARTY_START_MEMBERS_CHURCHMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
                     new Party(GV.PARTY_TITLE_TRADES, "", "", GV.PARTY_START_MEMBERS_TRADES, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
@@ -9,7 +9,17 @@ function Duma() {
 
     this.GetPatrys = function (){
         return parties;
-        }
+    }
+    this.SetPatrys = function (data){
+        parties = data.map(party => new Party(
+            party.title,
+            party.nikname,
+            party.task,
+            party.members,
+            party.happiness,
+            party.salary,
+            party.offshores));
+    }
     this.PartyHappiness = function (church_happiness) {
         return (parties.reduce((total, party) => {
             return total + this.CalculateHappiness(church_happiness, party)

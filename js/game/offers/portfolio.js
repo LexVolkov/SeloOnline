@@ -4,6 +4,12 @@ function Portfolio() {
     this.GetAllContracts = function(){
         return portfolio;
     }
+    this.SetContracts = function(data){
+        portfolio = data.map(contract => new Contract(
+            contract.product,
+            contract.period,
+            contract.amount));
+    }
     this.GetContractCount = function(){
         return portfolio.length;
     }
@@ -32,7 +38,7 @@ function Portfolio() {
         portfolio.push(new Contract(product, period, amount));
     }
 
-    this.CalculateTotalProd = function (target_product) {
+    this.CalculateTotalProdFromContracts = function (target_product) {
         return portfolio.reduce((total, prop) => {
             let sum = 0;
             if (prop.product === target_product) {

@@ -200,7 +200,7 @@ function Display() {
                         error = true;
                     }
                 }
-                const but = '<a href="#" class="ui-btn ui-icon-plus ui-btn-icon-left ' + (error ? 'ui-state-disabled' : '') + '" onclick="game.${onFunc}(\'' + building.key + '\')"  data-rel="back">Додати</a>';
+                const but = `<a href="#" class="ui-btn ui-icon-plus ui-btn-icon-left ${(error ? 'ui-state-disabled' : '')}" onclick="game.${onFunc}('${building.key}')"  data-rel="back">Додати</a>`;
                 const building_des = GetBuildingDescritopn(building, but)
                 error?building_des.arr_data.push({title:"Помилка:", value:error_text }):"";
                 building_content += CreateCollapsible(building_des.title, building_des.arr_data);
@@ -335,7 +335,7 @@ function Display() {
         content += `<input type="number" name="balance" id="${GV.ID_START_BALANCE.substring(1)}" value="${GV.DEFAULT_START_BALANCE}">`;
         //content += `<h3>Виберіть будівлі доступні на початку гри:</h3>`;
         //content += `${building_list}`;
-        content += `<p><a href="#" onclick="game.StartGame();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-rel="page_week">Створити</a></p>`;
+        content += `<p><a href="#" onclick="game.OnStartGame();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b"  data-rel="page_week">Створити</a></p>`;
         content += ``;
         return content;
     }

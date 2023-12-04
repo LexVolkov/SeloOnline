@@ -14,11 +14,10 @@ function Game(){
     this.InitGame = function (startBalance, startBuildings) {
         selo = new Selo(startBalance, new Builder(), new Duma(), new Portfolio(),  new Offers());
         startBuildings.forEach((b) => {selo.buildings.AddBuildingFromKey(b);})
-        previous_population = selo.partys.Population();
         f_initGame = true;
-        console.log(selo)
     }
     this.Start = function (){
+        previous_population = selo.partys.Population();
         UpdateWeek();
     }
     function NextWeek() {
@@ -31,7 +30,8 @@ function Game(){
         selo.contracts.DecreaseContractPeriod();
         const joylvl_total = CalculateTotalHappiness().joylvl_total;
         selo.partys.UpdatePopulation(joylvl_total);
-        UpdateWeek()
+        UpdateWeek();
+        SaveGame();
         previous_population = selo.partys.Population();
     }
     function UpdateWeek() {
@@ -82,18 +82,27 @@ function Game(){
         result = result + contract_profit - costs_total;
         return result;
     }
-
-
-
     function UpdateData() {
         selo.offers.UpdateContracts(selo.week);
-        localforage.setItem(GV.DB_STORE_NAME, selo)
+    }
+    function SaveGame() {
+        localforage.setItem(GV.DB_STORE_NAME, PackSavedData(selo))
             .then(() => {
                 console.log('Игра успешна сохранена.');
             })
             .catch(err => {
                 console.error('Ошибка при сохранении игры:', err);
             });
+    }
+    function PackSavedData(selo_data) {
+        let save_data = {};
+        save_data.week = selo_data.week;
+        save_data.balance = selo_data.balance;
+        save_data.buildings = selo_data.buildings.GetConstructs();
+        save_data.parties = selo_data.partys.GetPatrys();
+        save_data.contracts = selo_data.contracts.GetAllContracts();
+
+        return save_data;
     }
     function UpdateInfo() {
         ShowHeader();
@@ -116,7 +125,7 @@ function Game(){
         //$(GV.ID_NEW_GAME).html(display.DisplayStartSettings(display.UpdateBuildingList(db_buildings, CheckProductRequirements, CheckIfSingleBuildingExist, this.OnAddStartBuilding)));
         $.mobile.navigate(GV.ID_PAGE_NEW_GAME);
     }
-    this.StartGame = function (){
+    this.OnStartGame = function (){
         const startBalance =  Number($(GV.ID_START_BALANCE).val());
         const startBuildings = ["silrada","house_of_builders", "stable", "wheat"];
         this.InitGame(startBalance, startBuildings);
@@ -126,10 +135,16 @@ function Game(){
         selo.buildings.AddPlannedBuilding(building_key);
     }
     this.LoadGame = function (data){
-        selo = data;
-        previous_population = selo.partys.Population();
-        f_initGame = true;
-        UpdateInfo();
+        this.InitGame(0, []);
+        UnPackSaveData(data);
+        this.Start();
+    }
+    function UnPackSaveData(data) {
+        selo.week  = data.week;
+        selo.balance  = data.balance;
+        selo.buildings.SetConstructs(data.buildings);
+        selo.partys.SetPatrys(data.parties);
+        selo.contracts.SetContracts(data.contracts);
     }
     function ShowHeader() {
         $(GV.ID_PAGE_WEEK_HEADER).html(display.DisplayMainPageTitle(selo.week));
@@ -237,7 +252,9 @@ function Game(){
     function GetCurrentProduction() {
         let arr_data = [];
         for (const prod in PRODUCTIONS) {
+
             const total = selo.buildings.CalculateTotalProd(PRODUCTIONS[prod]);
+            //console.log(prod,total)
             const title =  PRODUCTIONS[prod].tittle;
             if (total > 0)arr_data.push({title:title, value:total});
         }
@@ -260,7 +277,8 @@ function Game(){
     }
     this.OnOpenBuildingList = function(){
         const db_buildings = selo.buildings.GetGroupedArray();
-        $(GV.ID_IFNO_BUILDINGS_LIST).html(display.UpdateBuildingList(db_buildings, CheckProductRequirements, CheckIfSingleBuildingExist, this.OnAddPlannedBuilding));
+
+        $(GV.ID_IFNO_BUILDINGS_LIST).html(display.UpdateBuildingList(db_buildings, CheckProductRequirements, CheckIfSingleBuildingExist,"OnAddPlannedBuilding"));
         UpdateCollapsible();
     }
     function CheckIfSingleBuildingExist(building, f_planned = false){
@@ -309,7 +327,7 @@ function Game(){
     }
     function CheckProductAmountRequirements(req_product, amount){
         const total_product_amount = selo.buildings.CalculateTotalProd(req_product);
-        const total_contract_amount = selo.contracts.CalculateTotalProd(req_product);
+        const total_contract_amount = selo.contracts.CalculateTotalProdFromContracts(req_product);
         //console.log(amount,total_product_amount,total_contract_amount)
         return amount <= total_product_amount-total_contract_amount;
     }

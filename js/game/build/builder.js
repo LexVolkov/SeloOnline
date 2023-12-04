@@ -12,6 +12,14 @@ function Builder() {
     this.GetConstructs = function (){
         return built;
     }
+    this.SetConstructs = function (built_data){
+        built = built_data.map(structure => {
+            let copy = new Structure(structure.building);
+            copy.id = structure.id; // Копирование id
+            copy.active = structure.active; // Копирование active
+            return copy;
+        });
+    }
     this.GetPlanned = function (){
         return planned;
     }
@@ -177,7 +185,8 @@ function Builder() {
             let sum = 0;
             if (structure.active) {
                 structure.building[par_name].forEach(function (self_product) {
-                    if (self_product === target_product) {
+                    //console.log(self_product, target_product)
+                    if (self_product.tittle === target_product.tittle) {
 
                         sum += self_product.base_amount;
                     }
