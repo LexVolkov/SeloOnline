@@ -80,7 +80,7 @@ function RuleBook() {
         })
     });
     this.rules.push({
-        number_of_week: 10,
+        number_of_week: 1000,
         villages: new Rule({
             products_permited: [PRODUCTIONS.WHEAT,
                                 PRODUCTIONS.BEETROOT,
