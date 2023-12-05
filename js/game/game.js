@@ -1,22 +1,21 @@
-//TODO первоначальная страница
+//TODO первоначальная страница (ники министров)
 //TODO виды жилья
-//TODO сохранение данных
-//TODO налоги с работников
 //TODO кредит
-//TODO убрать журнал в колапс на главной странице
-//TODO !!!!!!!!!!!! нужно рагрузить обьект selo, чтобы там были только данные.
+//TODO задания партий
 function Game(){
 	let selo = {};
     let f_initGame = false;
     const display = new Display();
     const events = new Journal();
     let previous_population = 0;
+    this.load_data = {};
     this.InitGame = function (startBalance, startBuildings) {
         selo = new Selo(startBalance, new Builder(), new Duma(), new Portfolio(),  new Offers());
         startBuildings.forEach((b) => {selo.buildings.AddBuildingFromKey(b);})
         f_initGame = true;
     }
     this.Start = function (){
+        window.history.pushState({}, document.title, "/index.html");
         $.mobile.navigate(GV.ID_PAGE_WEEK);
         previous_population = selo.partys.Population();
         UpdateWeek();
@@ -37,8 +36,9 @@ function Game(){
     }
     function UpdateWeek() {
         UpdateData();
-        UpdateInfo();
         MakeDestiny();
+        UpdateInfo();
+
     }
     function MakeDestiny(){
         const population = selo.partys.Population();
@@ -53,20 +53,14 @@ function Game(){
         selo_data.migration = population - previous_population;
         selo_data.joylvl = CalculateTotalHappiness();
         const current_events = events.GetEvents(selo_data);
-        if(current_events.length > 0){
-            $(GV.ID_INFO_EVENTS).html(display.DisplayEvents(current_events));
-            setTimeout(function() {
-                $.mobile.navigate(GV.ID_PAGE_EVENTS, {transition: "none"});
-            }, 250)
-            current_events.forEach((event)=>{
-                RunAction(event.event_action.action, event.event_action.value);
-            })
-        }
+        $(GV.ID_INFO_EVENTS).html(display.DisplayEvents(current_events));
+        current_events.forEach((event)=>{
+            RunAction(event.event_action.action, event.event_action.value);
+        })
     }
     function RunAction(action, value){
         if(action === GV.ACTION_BALANCE){
             selo.balance += value;
-            ShowBalanceInfo();
         }
     }
     this.OnCloseEventDialog =  function (){
@@ -137,10 +131,14 @@ function Game(){
     this.OnAddStartBuilding = function (building_key){
         selo.buildings.AddPlannedBuilding(building_key);
     }
-    this.LoadGame = function (data){
+    this.LoadGame = function (){
         this.InitGame(0, []);
-        UnPackSaveData(data);
-        this.Start();
+        if(Object.keys(this.load_data).length !== 0){
+            UnPackSaveData(this.load_data);
+            this.Start();
+        } else {
+            console.error("Нет данных для загрузки!");
+        }
     }
     function UnPackSaveData(data) {
         let selo_data = data.selo;

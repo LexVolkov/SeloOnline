@@ -89,6 +89,7 @@ GV.ID_PAGE_WEEK_HEADER = "#page_title";
 GV.ID_INFO_POPUP = "#popup_info";
 GV.ID_INFO_EVENTS = "#events_info";
 GV.ID_START_BALANCE = "#start_balance";
+GV.ID_INFO_EVENTS= "#events_info";
 
 GV.ID_PAGE_NEW_GAME = "#page_new_game";
 GV.ID_PAGE_WEEK = "#page_week";

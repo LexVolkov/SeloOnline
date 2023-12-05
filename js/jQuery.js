@@ -64,8 +64,11 @@ $(document).ready(function(){
         localforage.getItem(GV.DB_STORE_NAME)
             .then(data => {
                 if (data !== null) {
+                    const but_new = `<a href="${GV.ID_PAGE_NEW_GAME}" onClick="game.ShowStartSettings()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-plus ui-btn-icon-left">Нова гра</a>`
+                    const but_load = `<a href="${GV.ID_PAGE_WEEK}" onClick="game.LoadGame()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-arrow-r ui-btn-icon-right">Продовжити</a>`
+                    $(GV.ID_NEW_GAME).html(`${but_new}</br>${but_load}`);
                     // Если данные найдены, вызываем функцию LoadGame
-                    game.LoadGame(data);
+                    game.load_data = data;
                 } else {
                     // Если данных нет, вызываем функцию ShowStartSettings
                     game.ShowStartSettings();

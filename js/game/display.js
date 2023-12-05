@@ -308,17 +308,23 @@ function Display() {
         return (week + " тиждень");
     }
     this.DisplayEvents = function (current_events){
-        let content = `<h3>Журнал подій</h3>`;
+        let content = "";
+        let collapse = current_events.length >0?false:true
+        console.log(current_events.length)
+        content += `<div class="col" data-role="collapsible" data-collapsed="${collapse}" align="left">`;
+        content += `<h4>Журнал подій (${current_events.length})</h4>`;
+
+        content += '<div class="ui-grid-a">';
         current_events.forEach((event)=>{
-            content += DisplayEvent("", event.message, event.data);
+            content += DisplayEvent(event.message, event.data);
         })
-        content += '';
+        content += '</div >';
+        content += '</div >';
 
         return content;
     }
-    function DisplayEvent(header, text, data){
-        let content = `<h4>${header}</h4>`;
-        content += `${text}`;
+    function DisplayEvent(text, data){
+        let content = `<h4>${text}</h4>`;
         if(data.value !== ""){
             content += '<div class="ui-grid-a">';
             content +=

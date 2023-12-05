@@ -26,7 +26,7 @@ function Destiny() {
     events.push(new SeloEvent(new Conditions({
             week:[1,2,3,4,5,6,7,8,9],
             protection:0
-        }),new EventAction(GV.ACTION_BALANCE, -10),
+        }),new EventAction(GV.ACTION_BALANCE, -100),
         "На вас напали розбійники та пограбували!",
         0.1));
 }
