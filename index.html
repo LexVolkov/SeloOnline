@@ -17,11 +17,6 @@
             margin-right: 3px;
         }
     </style >
-    <script id="panel-init" type="text/javascript">
-        $(function () { 
-            $("body>[data-role='panel']").panel();
-        });
-    </script>
 
     <script src="js/jQuery.js" type="text/javascript"></script>
 
@@ -57,7 +52,7 @@
     <div data-role="page" id="page_week" data-title="Selo Edition" align='center' class="ui-page-theme-b">
         <div data-role="header">
             <h1 id="page_title">Selo edition</h1>
-            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="#page_new_game" onclick="game.ShowStartSettings()" data-icon="plus" data-iconpos="left">Нова гра</a>
             <a href="#page_next_week" onclick="game.OnNextWeek()"  data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right ui-btn-b">Наступний тиждень</a>
 
         </div><!-- /header -->
@@ -168,12 +163,6 @@
 
 
 </div><!-- /page -->
-    
-  <!--
-     <div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-theme="b">
-        <a href="https://t.me/Lex_Volkov" class="ui-btn ui-shadow ui-corner-all">Lex Volkov</a>
-    </div>
--->
 </body>
 
 </html>
