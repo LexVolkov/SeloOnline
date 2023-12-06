@@ -2,6 +2,7 @@
 //TODO виды жилья
 //TODO кредит
 //TODO задания партий
+//TODO можно ли перевести мигрантов в события?
 function Game(){
 	let selo = {};
     let f_initGame = false;
@@ -45,7 +46,9 @@ function Game(){
         const selo_data = {};
         selo_data.week = selo.week;
         selo_data.money = selo.balance;
-        selo_data.production = GetCurrentProduction();
+        const production = GetCurrentProduction();
+        selo_data.prod_iron = selo.buildings.CalculateTotalProd(PRODUCTIONS.IRON)
+        selo_data.prod_amber = selo.buildings.CalculateTotalProd(PRODUCTIONS.AMBER)
         const army = GetCurrentArmy();
         selo_data.protection = army.protection;
         selo_data.cossacks = army.cossacks;

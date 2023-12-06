@@ -22,7 +22,6 @@
     'js/game/events/class_event.js',
     'js/game/events/db_events.js',
     'js/game/events/journal.js',
-    'js/game/events/conditions.js',
     'js/game/events/class_action.js',
     'js/game/class_selo.js',
     'js/game/display.js',

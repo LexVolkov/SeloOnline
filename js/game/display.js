@@ -310,7 +310,6 @@ function Display() {
     this.DisplayEvents = function (current_events){
         let content = "";
         let collapse = current_events.length >0?false:true
-        console.log(current_events.length)
         content += `<div class="col" data-role="collapsible" data-collapsed="${collapse}" align="left">`;
         content += `<h4>Журнал подій (${current_events.length})</h4>`;
 
