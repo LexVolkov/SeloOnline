@@ -437,7 +437,7 @@ function Buildings(){
     type:"Духовенство",
     single:true,
     constructionTime:7,
-    price:2000,
+    price:3000,
     workerplace:6,
     workerSalary:10,
     description:"Назавжди піднімає рівень щастя партії Церковників на +3.",

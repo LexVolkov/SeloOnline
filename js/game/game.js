@@ -1,8 +1,8 @@
 //TODO первоначальная страница (ники министров)
 //TODO виды жилья
 //TODO кредит
-//TODO задания партий
-//TODO можно ли перевести мигрантов в события?
+//TODO уровни сложности
+//TODO реалізувати лехварню
 function Game(){
 	let selo = {};
     let f_initGame = false;
@@ -16,17 +16,20 @@ function Game(){
         f_initGame = true;
     }
     this.Start = function (){
-        window.history.pushState({}, document.title, "/index.html");
+        //window.history.pushState({}, document.title, "/index.html");
         $.mobile.navigate(GV.ID_PAGE_WEEK);
         previous_population = selo.partys.Population();
         UpdateWeek();
     }
     function NextWeek() {
+
         const population = selo.partys.Population();
 
         selo.week++;
         selo.balance = CalculateBalance();
-        selo.buildings.Build();
+        const build_keys = selo.buildings.Build();
+        selo.partys.CheckTasks(build_keys, selo.week);
+        selo.partys.UpdateTasks(selo.week);
         selo.buildings.DisableBuildingsWithoutWorkers(population);
         selo.contracts.DecreaseContractPeriod();
         const joylvl_total = CalculateTotalHappiness().joylvl_total;
@@ -34,6 +37,7 @@ function Game(){
         UpdateWeek();
         SaveGame();
         previous_population = selo.partys.Population();
+
     }
     function UpdateWeek() {
         UpdateData();
@@ -46,9 +50,7 @@ function Game(){
         const selo_data = {};
         selo_data.week = selo.week;
         selo_data.money = selo.balance;
-        const production = GetCurrentProduction();
         selo_data.prod_iron = selo.buildings.CalculateTotalProd(PRODUCTIONS.IRON)
-        selo_data.prod_amber = selo.buildings.CalculateTotalProd(PRODUCTIONS.AMBER)
         const army = GetCurrentArmy();
         selo_data.protection = army.protection;
         selo_data.cossacks = army.cossacks;
@@ -117,7 +119,6 @@ function Game(){
         ShowPartysInfo();
         ShowBuildingInfo();
         ShowOffersInfo();
-
     }
     this.ShowStartSettings = function(){
         //const db_buildings = selo.buildings.GetGroupedArray();
@@ -269,8 +270,12 @@ function Game(){
         const population = selo.partys.Population();
         const partys = selo.partys.GetPatrys();
         const church_happiness = selo.buildings.CalculateTotalBuildPar(GV.BUILD_PAR_CHURCH_HAPPINESS);
-        $(GV.ID_IFNO_PARTYS).html(display.DisplayPartys(partys, population, church_happiness));
+        const week = selo.week;
+        $(GV.ID_IFNO_PARTYS).html(display.DisplayPartys(partys, population, church_happiness, week, GetTaskTitle));
         UpdateCollapsible();
+    }
+    function GetTaskTitle(task){
+        return  selo.buildings.GetTaskTitle(task);
     }
     function  ShowBuildingInfo(){
         const constructs = selo.buildings.GetConstructs();

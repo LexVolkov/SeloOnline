@@ -60,7 +60,7 @@ function Display() {
         return CreateCollapsible(header, arr_data)
     }
     this.DisplayJoy = function (joylvl_total, joylvl_unemployeds, joylvl_homeless, joylvl_parties, joylvl_buildings) {
-        const header = `Рівень задоволення: ${joylvl_total}`;
+        const header = `Рівень задоволення: ${joylvl_total.toFixed(2)}`;
         const arr_data = [
             { title: "Безробітні: ", value: joylvl_unemployeds },
             { title: "Безхатьки: ", value: joylvl_homeless },
@@ -101,10 +101,12 @@ function Display() {
         const header = `Видобуток:`;
         return CreateCollapsible(header, arr_data);
     }
-    this.DisplayPartys = function (partys,population, church_happiness) {
+    this.DisplayPartys = function (partys,population, church_happiness, week, funcGetTaskTitle) {
         $(GV.ID_IFNO_PARTYS).empty();
         const header = "Партії";
         let arr_colset_data = [];
+        let week_key = Number(Math.ceil(week / 4)-1)
+        week_key = week_key===-1?0:week_key;
         partys.forEach((party) => {
             const arr_data = [];
             const popularity = (party.members / population * 100).toFixed(0);
@@ -115,7 +117,7 @@ function Display() {
             arr_data.push({title:"Рівень щастя:", value:happiness});
             arr_data.push({title:"Відсоток населення:", value:popularity+"%"});
             arr_data.push({title:"Відповідальний:", value:party.nikname});
-            arr_data.push({title:"Завдання:", value:party.task});
+            arr_data.push({title:"Завдання:", value:funcGetTaskTitle(party.tasks[week_key])});
             arr_data.push({title:"Зарплатня:", value:party.salary});
             arr_data.push({title:"Офшори:", value:party.offshores });
             arr_colset_data.push({title:party.title, arr_data:arr_data})

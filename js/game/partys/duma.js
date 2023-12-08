@@ -1,11 +1,5 @@
 function Duma() {
-    let parties = [new Party(GV.PARTY_TITLE_KOZAKS, "", "", GV.PARTY_START_MEMBERS_KOZAKS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
-                    new Party(GV.PARTY_TITLE_FARMMANS, "", "", GV.PARTY_START_MEMBERS_FARMMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
-                    new Party(GV.PARTY_TITLE_CHURCHMANS, "", "", GV.PARTY_START_MEMBERS_CHURCHMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
-                    new Party(GV.PARTY_TITLE_TRADES, "", "", GV.PARTY_START_MEMBERS_TRADES, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
-                    new Party(GV.PARTY_TITLE_FREEMANS, "", "", GV.PARTY_START_MEMBERS_FREEMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
-                    new Party(GV.PARTY_TITLE_HANDMADEMANS, "", "", GV.PARTY_START_MEMBERS_HANDMADEMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0)
-                    ];
+    let parties = new Parties().GetParties();
 
     this.GetPatrys = function (){
         return parties;
@@ -14,7 +8,7 @@ function Duma() {
         parties = data.map(party => new Party(
             party.title,
             party.nikname,
-            party.task,
+            party.tasks,
             party.members,
             party.happiness,
             party.salary,
@@ -29,10 +23,11 @@ function Duma() {
         const population = this.Population();
         let total_happiness = 0;
         const building_happiness = party.title === GV.PARTY_TITLE_CHURCHMANS ?
-            Number(party.happiness + church_happiness) :
-            Number(party.happiness);
+            Number(church_happiness) :
+            0;
+        const current_happiness = Number(party.happiness)+building_happiness;
         const modificator = Number(party.members / population)
-        total_happiness = (GV.PARTY_BASIC_HAPPINESS - building_happiness)*modificator;
+        total_happiness = (current_happiness - GV.PARTY_BASIC_HAPPINESS)*modificator;
         return total_happiness;
     }
     this.Population = function() {
@@ -80,6 +75,37 @@ function Duma() {
             }
         }
     }
+    this.CheckTasks = function (arr_build_keys, week){
+        parties.forEach(party => {
+                arr_build_keys.forEach(key => {
+                    const task_key = GetTaskKey(week);
+                    if(party.tasks[task_key] === key){
+                        party.tasks[task_key] = "";
+                    }
+                })
+        })
+    }
+    function GetTaskKey(week){
+        let week_key = Number(Math.ceil(week / 4)-1);
+        week_key = week_key===-1?0:week_key;
+        return week_key;
+    }
+    this.UpdateTasks = function (week){
+        if (week % 4 === 0) {
+            const task_key = GetTaskKey(week);
+            parties.forEach(party => {
+                if(party.tasks[task_key] === ""){
+                    UpdateJoyLvl(party, 1);
+                }else{
+                    UpdateJoyLvl(party, -1);
+                }
+            })
+        }
+    }
+    function UpdateJoyLvl(party, value){
+        party.happiness += value;
+    }
+
 }
 
 

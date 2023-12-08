@@ -124,8 +124,20 @@ function Builder() {
         return { total: homeowners, homeless: homeless, barraks: barraks, eliteplaces: eliteplaces };
     }
     this.Build = function () {
+
+        let arr_build = [];
+        planned.forEach(pl_b =>
+        {
+            for (const db_bKey in db_buildings) {
+                if(db_buildings[db_bKey] === pl_b){
+                    arr_build.push(db_bKey);
+                }
+            }
+        });
         planned.forEach(building => this.AddBuilding(building));
         planned.length = 0;
+
+        return arr_build;
     }
     this.DisableBuildingsWithoutWorkers = function(population) {
         const work = this.Work(population);
@@ -217,4 +229,12 @@ function Builder() {
 
         return result;
     }
+    this.GetTaskTitle = function (task){
+        if(task === "" || undefined){
+            return "Виконано";
+        }else{
+            return db_buildings[task].title;
+        }
+
+    };
 }
