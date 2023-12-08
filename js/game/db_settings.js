@@ -2,7 +2,7 @@ const GV = {};
 GV.VERSION = 'v0.01';
 GV.COPYRIGHT = 'Розробка: © <a href="https://t.me/Lex_Volkov">Lex Volkov</a>';
 GV.FOOTER = '<h4 class="ui-title h4_footer_content" role="heading" aria-level="1"></h4>';
-GV.QCCOIN_PNG = '<img src="/img/qccoin.png" alt="&#128176;" class="gold-coin">';
+GV.QCCOIN_PNG = '<img src="img/qccoin.png" alt="&#128176;" class="gold-coin">';
 
 GV.DEFAULT_START_BALANCE = 10000;
 

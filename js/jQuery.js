@@ -16,6 +16,7 @@
     'js/game/offers/class_offer.js',
     'js/game/partys/class_party.js',
     'js/game/partys/duma.js',
+    'js/game/partys/db_parties.js',
     'js/game/productions/class_product.js',
     'js/game/productions/db_productions.js',
     'js/game/productions/warehouse.js',
