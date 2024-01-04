@@ -235,6 +235,5 @@ function Builder() {
         }else{
             return db_buildings[task].title;
         }
-
     };
 }

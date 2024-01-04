@@ -20,7 +20,7 @@ function RuleBook() {
         })
     });
     this.rules.push({
-        number_of_week: 1,
+        number_of_week: 3,
         villages: new Rule({
             products_permited: [PRODUCTIONS.WHEAT,
                                 PRODUCTIONS.BEETROOT,
@@ -37,7 +37,7 @@ function RuleBook() {
         })
     });
     this.rules.push({
-        number_of_week: 3,
+        number_of_week: 8,
         villages: new Rule({
             products_permited: [PRODUCTIONS.WHEAT,
                                 PRODUCTIONS.BEETROOT,
@@ -47,7 +47,7 @@ function RuleBook() {
                                 PRODUCTIONS.MEAT],
             max_contracts: 2,
             min_restruction: 0.2,
-            max_restruction: 0.5
+            max_restruction: 0.8
         }),
         citys: new Rule({
             products_permited: this.arr_prod_city,
@@ -57,7 +57,7 @@ function RuleBook() {
         })
     });
     this.rules.push({
-        number_of_week: 5,
+        number_of_week: 13,
         villages: new Rule({
             products_permited: [PRODUCTIONS.WHEAT,
                                 PRODUCTIONS.BEETROOT,
@@ -69,17 +69,40 @@ function RuleBook() {
                                 PRODUCTIONS.AMBER,
                                 PRODUCTIONS.IRON],
             max_contracts: 3,
-            min_restruction: 0.2,
-            max_restruction: 0.6
+            min_restruction: 0.1,
+            max_restruction: 0.9
         }),
         citys: new Rule({
             products_permited: this.arr_prod_city,
             max_contracts: 2,
+            min_restruction: 0.5,
+            max_restruction: 1.5
+        })
+    });
+    this.rules.push({
+        number_of_week: 20,
+        villages: new Rule({
+            products_permited: [PRODUCTIONS.WHEAT,
+                PRODUCTIONS.BEETROOT,
+                PRODUCTIONS.SUNFLOWER,
+                PRODUCTIONS.WOOD,
+                PRODUCTIONS.COTTON,
+                PRODUCTIONS.MEAT,
+                PRODUCTIONS.BOARDS,
+                PRODUCTIONS.AMBER,
+                PRODUCTIONS.IRON],
+            max_contracts: 3,
+            min_restruction: 0.1,
+            max_restruction: 1
+        }),
+        citys: new Rule({
+            products_permited: this.arr_prod_city,
+            max_contracts: 3,
             min_restruction: 1,
             max_restruction: 2
         })
     });
-    this.rules.push({
+    this.rules.push({//TODO Зачем?
         number_of_week: 1000,
         villages: new Rule({
             products_permited: [PRODUCTIONS.WHEAT,
@@ -99,7 +122,7 @@ function RuleBook() {
             products_permited: this.arr_prod_city,
             max_contracts: 3,
             min_restruction: 1,
-            max_restruction: 2
+            max_restruction: 1.5
         })
     });
 }

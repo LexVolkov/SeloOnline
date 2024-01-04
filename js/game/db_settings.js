@@ -10,6 +10,7 @@ GV.BASIC_HAPPINESS = 5;//Общий базовый показатель счас
 GV.MAX_CONTRACTS_PERIOD = 3;//Максимально недель сколько может держаться контракт от одного контрагента
 GV.MIN_CONTRACT_OFFER = 2;//Мин кол-во предложений от агента
 GV.MAX_CONTRACT_OFFER = 8;//Макс -//-
+GV.TASK_WEEK = 4;
 GV.FORMULA_HAPPINESS = [
     {lvl:10, migrants:30},
     {lvl:9, migrants:25},

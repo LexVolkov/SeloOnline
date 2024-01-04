@@ -3,6 +3,9 @@
 //TODO кредит
 //TODO уровни сложности
 //TODO реалізувати лехварню
+//TODO реалізувати смерть та кладовище
+// добавить событие, для завершения игры. Когда построена Ратуша
+// добавить кнопку распечатки зданий
 function Game(){
 	let selo = {};
     let f_initGame = false;
@@ -30,10 +33,10 @@ function Game(){
         const build_keys = selo.buildings.Build();
         selo.partys.CheckTasks(build_keys, selo.week);
         selo.partys.UpdateTasks(selo.week);
-        selo.buildings.DisableBuildingsWithoutWorkers(population);
         selo.contracts.DecreaseContractPeriod();
         const joylvl_total = CalculateTotalHappiness().joylvl_total;
         selo.partys.UpdatePopulation(joylvl_total);
+        selo.buildings.DisableBuildingsWithoutWorkers(population);
         UpdateWeek();
         SaveGame();
         previous_population = selo.partys.Population();
@@ -290,6 +293,8 @@ function Game(){
 
         $(GV.ID_IFNO_BUILDINGS_LIST).html(display.UpdateBuildingList(db_buildings, CheckProductRequirements, CheckIfSingleBuildingExist,"OnAddPlannedBuilding"));
         UpdateCollapsible();
+
+        console.log()
     }
     function CheckIfSingleBuildingExist(building, f_planned = false){
         return selo.buildings.CheckIfSingleBuildingExist(building, f_planned);
@@ -300,29 +305,24 @@ function Game(){
 
     this.OnAddPlannedBuilding = function(building_key){
         selo.buildings.AddPlannedBuilding(building_key);
-        ShowCostsInfo();
-        ShowBuildingInfo();
+        UpdateInfo();
     }
     this.OnDeActivateBuilding = function (i){
         selo.buildings.DeactivateBuilding(i);
         const population = selo.partys.Population();
         selo.buildings.DisableBuildingsWithoutWorkers(population);
-        ShowPeopleInfo();
-        ShowBuildingInfo();
-        ShowJoyInfo();
+        UpdateInfo();
 
     }
     this.OnActivateBuilding = function (i){
         selo.buildings.ActivateBuilding(i);
         const population = selo.partys.Population();
         selo.buildings.DisableBuildingsWithoutWorkers(population);
-        ShowPeopleInfo();
-        ShowBuildingInfo();
-        ShowJoyInfo();
+        UpdateInfo()
     }
     this.OnDeletePlannedBuilding = function (i){
         selo.buildings.DeletePlannedBuild(i);
-        ShowBuildingInfo();
+        UpdateInfo();
         this.OnNextWeek();
     }
 
@@ -356,12 +356,12 @@ function Game(){
         const period = $(GV.ID_CONTRACT_SLIDER).val();
         selo.contracts.AddContract(contract.product,period,contract.amount);
         selo.offers.RemoveContract(contract);
-        ShowContractInfo();
-        ShowOffersInfo();
+        UpdateInfo();
         this.OnCloseEventDialog();
 
     }
     this.OnNextWeek = function (){
+        UpdateInfo();
         let content = '';
         $(GV.ID_IFNO_NEXT_WEEK_HEADER).html(display.DisplayNWPHeader(selo.week));
 

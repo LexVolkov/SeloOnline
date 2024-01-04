@@ -77,12 +77,12 @@ function Duma() {
     }
     this.CheckTasks = function (arr_build_keys, week){
         parties.forEach(party => {
-                arr_build_keys.forEach(key => {
-                    const task_key = GetTaskKey(week);
-                    if(party.tasks[task_key] === key){
-                        party.tasks[task_key] = "";
-                    }
-                })
+            arr_build_keys.forEach(key => {
+                const task_key = GetTaskKey(week);
+                if(party.tasks[task_key] === key){
+                    party.tasks[task_key] = "";
+                }
+            })
         })
     }
     function GetTaskKey(week){
@@ -91,7 +91,7 @@ function Duma() {
         return week_key;
     }
     this.UpdateTasks = function (week){
-        if (week % 4 === 0) {
+        if (week % GV.TASK_WEEK === 0) {
             const task_key = GetTaskKey(week);
             parties.forEach(party => {
                 if(party.tasks[task_key] === ""){

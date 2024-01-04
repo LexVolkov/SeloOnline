@@ -31,9 +31,10 @@ function Display() {
     this.DisplayPeople = function (population, workerplaces, workers, unemployment, homeowners, homeless) {
         const header = `Населення: ${population}`;
         const arr_data = [
-            { title: "Робочих місць: ", value: workerplaces },
+           //TODO { title: "Робочих місць: ", value: workerplaces },
             { title: "Працюють: ", value: workers },
-            { title: "Безробіття: ", value: unemployment},
+            { title: "Вільні: ", value: (population-workers) },
+            { title: "Безробіття: ", value: unemployment },
             { title: "Мають дім: ", value: homeowners },
             { title: "Безхатьки: ", value: homeless }
         ];
@@ -105,7 +106,7 @@ function Display() {
         $(GV.ID_IFNO_PARTYS).empty();
         const header = "Партії";
         let arr_colset_data = [];
-        let week_key = Number(Math.ceil(week / 4)-1)
+        let week_key = Number(Math.ceil(week / GV.TASK_WEEK)-1)
         week_key = week_key===-1?0:week_key;
         partys.forEach((party) => {
             const arr_data = [];

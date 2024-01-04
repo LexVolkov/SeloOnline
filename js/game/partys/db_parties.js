@@ -1,14 +1,25 @@
-function Parties() {
+function Parties() { //TODO Сделать проверку длины массива, если перебор, без заданий
     let parties = [
         new Party(GV.PARTY_TITLE_KOZAKS, "",
             [
                 "watchplace",
+                "wall",
                 "watchplace",
                 "wall",
-                "wall",
+                "kazarms",
+                "watchplace",
+                "kazarms",
+                "sich",
                 "kazarms",
                 "kazarms",
-                "sich"
+                "kazarms",
+                "kazarms",
+                "kazarms",
+                "kazarms",
+                "kazarms",
+                "kazarms",
+                "kazarms",
+                "kazarms"
             ], GV.PARTY_START_MEMBERS_KOZAKS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
         new Party(GV.PARTY_TITLE_FARMMANS, "",
             [
@@ -18,7 +29,20 @@ function Parties() {
                 "smear",
                 "kazarms",
                 "smear",
-                "farmstead"
+                "farmstead",
+                "oilmill",
+                "mine",
+                "moonshine_apparatus",
+                "mill",
+                "furniture_makers",
+                "jewelry_workshop",
+                "smithy",
+                "farm",
+                "mine",
+                "oilmill",
+                "kazarms",
+                "farmstead",
+                "smithy"
             ], GV.PARTY_START_MEMBERS_FARMMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
         new Party(GV.PARTY_TITLE_CHURCHMANS, "",
             [
@@ -28,7 +52,20 @@ function Parties() {
                 "wall",
                 "smear",
                 "farmstead",
-                "farmstead"
+                "mill",
+                "farmstead",
+                "wall",
+                "smear",
+                "kazarms",
+                "furniture_makers",
+                "jewelry_workshop",
+                "mine",
+                "smear",
+                "brracks",
+                "smear",
+                "brracks",
+                "smear",
+                "brracks"
             ], GV.PARTY_START_MEMBERS_CHURCHMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
         new Party(GV.PARTY_TITLE_TRADES, "",
             [
@@ -38,17 +75,43 @@ function Parties() {
                 "brracks",
                 "farm",
                 "smear",
-                "farmstead"
+                "farmstead",
+                "stable",
+                "farm",
+                "brracks",
+                "smear",
+                "brracks",
+                "smear",
+                "brracks",
+                "smear",
+                "brracks",
+                "smear",
+                "brracks",
+                "smear",
+                "brracks"
             ], GV.PARTY_START_MEMBERS_TRADES, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
         new Party(GV.PARTY_TITLE_FREEMANS, "",
             [
-                "taverna",
                 "brracks",
+                "taverna",
                 "lumberyard",
                 "wheat",
                 "smear",
                 "farmstead",
-                "farmstead"
+                "brracks",
+                "farmstead",
+                "brracks",
+                "brracks",
+                "taverna",
+                "lumberyard",
+                "wheat",
+                "smear",
+                "farmstead",
+                "brracks",
+                "farmstead",
+                "brracks",
+                "smear",
+                "brracks"
             ], GV.PARTY_START_MEMBERS_FREEMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0),
         new Party(GV.PARTY_TITLE_HANDMADEMANS, "",
             [
@@ -58,7 +121,20 @@ function Parties() {
                 "mine",
                 "smear",
                 "wheat",
-                "mine"
+                "mine",
+                "smithy",
+                "furniture_makers",
+                "farmstead",
+                "smithy",
+                "smear",
+                "jewelry_workshop",
+                "wall",
+                "watchplace",
+                "kazarms",
+                "mine",
+                "wall",
+                "brracks",
+                "kazarms"
             ], GV.PARTY_START_MEMBERS_HANDMADEMANS, GV.PARTY_BASIC_HAPPINESS, GV.PARTY_PARTYMAN_BASIC_SALARY, 0)
     ];
     this.GetParties = function(){

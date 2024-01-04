@@ -61,12 +61,15 @@ $(document).ready(function(){
         PRODUCTIONS();
         game = new Game();
 
+
+
         localforage.getItem(GV.DB_STORE_NAME)
             .then(data => {
                 if (data !== null) {
                     const but_new = `<a href="${GV.ID_PAGE_NEW_GAME}" onClick="game.ShowStartSettings()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-plus ui-btn-icon-left">Нова гра</a>`
                     const but_load = `<a href="${GV.ID_PAGE_WEEK}" onClick="game.LoadGame()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-arrow-r ui-btn-icon-right">Продовжити</a>`
-                    $(GV.ID_NEW_GAME).html(`${but_new}</br>${but_load}`);
+                    const but_print = `<a href="" onClick="printBuildings();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-action ui-btn-icon-right">Друк</a>`
+                    $(GV.ID_NEW_GAME).html(`${but_new}</br>${but_load}</br>${but_print}`);
                     // Если данные найдены, вызываем функцию LoadGame
                     game.load_data = data;
                 } else {
@@ -87,3 +90,82 @@ function InitApp() {
     $(".h4_footer_content").append(GV.COPYRIGHT).append('<br>').append(GV.VERSION);
 }
 
+function printBuildings() {
+    // Создание нового окна
+    var printPage = window.open('', '_blank');
+
+    // Начало HTML-страницы с таблицей
+    printPage.document.write('<html><head><title>Print Buildings</title></head><body>');
+    printPage.document.write('<h1>Будівлі</h1>');
+    printPage.document.write('<table border="1"><tr><th>Назва</th><th>Тип</th><th>Час</th><th>Коштує</th><th>Робочих місць</th><th>з/п</th><th>Опис</th></tr>');
+
+    // Добавление данных о каждом здании в таблицу
+    const buildings  = new Buildings().GetBuildings();
+    for (var key in buildings) {
+        if (buildings.hasOwnProperty(key)) {
+            var building = buildings[key];
+            printPage.document.write('<tr>');
+            printPage.document.write('<td>' + building.title + '</td>');
+            printPage.document.write('<td>' + building.type + '</td>');
+            printPage.document.write('<td>' + building.constructionTime + '</td>');
+            printPage.document.write('<td>' + building.price + '</td>');
+            printPage.document.write('<td>' + building.workerplace + '</td>');
+            printPage.document.write('<td>' + building.workerSalary + '</td>');
+            printPage.document.write('<td>' + building.description + '</td>');
+            printPage.document.write('</tr>');
+        }
+    }
+
+    // Завершение HTML-страницы
+    printPage.document.write('</table></body></html>');
+
+    // Отображение страницы для печати
+    printPage.document.close();
+    printPage.focus();
+    printPage.print();
+    printPage.close();
+}
+function printBuildings() {
+    const buildings  = new Buildings().GetBuildings();
+    // Преобразование объекта buildings в массив
+    var buildingsArray = Object.keys(buildings).map(function(key) {
+        return buildings[key];
+    });
+
+    // Сортировка массива по типу здания
+    buildingsArray.sort(function(a, b) {
+        if (a.type < b.type) return -1;
+        if (a.type > b.type) return 1;
+        return 0;
+    });
+
+    // Создание нового окна
+    var newWin = window.open('', '_blank');
+
+    // Начало HTML-страницы с таблицей
+    newWin.document.write('<html><head><title>Print Buildings</title><style>table, th, td { border: 1px solid black; border-collapse: collapse; } th, td { padding: 5px; }</style></head><body>');
+    newWin.document.write('<h1>Будівлі</h1>');
+    newWin.document.write('<table border="1"><tr><th>Назва</th><th>Тип</th><th>Час</th><th>Коштує</th><th>Робочих місць</th><th>з/п</th><th>Опис</th></tr>');
+
+    // Добавление данных о каждом здании в таблицу
+    buildingsArray.forEach(function(building) {
+        newWin.document.write('<tr>');
+        newWin.document.write('<td>' + building.title + '</td>');
+        newWin.document.write('<td>' + building.type + '</td>');
+        newWin.document.write('<td>' + building.constructionTime + '</td>');
+        newWin.document.write('<td>' + building.price + '</td>');
+        newWin.document.write('<td>' + building.workerplace + '</td>');
+        newWin.document.write('<td>' + building.workerSalary + '</td>');
+        newWin.document.write('<td>' + building.description + '</td>');
+        newWin.document.write('</tr>');
+    });
+
+    // Завершение HTML-страницы
+    newWin.document.write('</table></body></html>');
+
+    // Отображение страницы для печати
+    newWin.document.close();
+    newWin.focus();
+    newWin.print();
+    newWin.close();
+}
