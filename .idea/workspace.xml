@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="">
+    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="исправил много багов и добавил немного нового">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/build/builder.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/builder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/build/db_buildings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/db_buildings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/db_settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/db_settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/display.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/events/db_events.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/events/db_events.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/offers/db_contracts_rules.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/offers/db_contracts_rules.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/partys/db_parties.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/partys/db_parties.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/partys/duma.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/partys/duma.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/jQuery.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/jQuery.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,22 +64,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/Мій диск/Shared_PC/MY_PROJECT/SeloOnline&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "G:/Мій диск/Shared_PC/MY_PROJECT/SeloOnline",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editing.templates",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SeloOnline/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
@@ -120,7 +111,8 @@
       <workItem from="1701062172003" duration="154000" />
       <workItem from="1701463899208" duration="44000" />
       <workItem from="1701516813590" duration="19211000" />
-      <workItem from="1704291269414" duration="9830000" />
+      <workItem from="1704291269414" duration="10313000" />
+      <workItem from="1704366962891" duration="262000" />
     </task>
     <task id="LOCAL-00002" summary="new">
       <option name="closed" value="true" />
@@ -186,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701530896509</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="исправил много багов и добавил немного нового">
+      <created>1704359262984</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1704359262984</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +219,7 @@
     <MESSAGE value="та много чего изменил." />
     <MESSAGE value="сделал прирост населения" />
     <MESSAGE value="поправил проверку количества рабочих, сделал некоторые фиксы." />
-    <option name="LAST_COMMIT_MESSAGE" value="поправил проверку количества рабочих, сделал некоторые фиксы." />
+    <MESSAGE value="исправил много багов и добавил немного нового" />
+    <option name="LAST_COMMIT_MESSAGE" value="исправил много багов и добавил немного нового" />
   </component>
 </project>
