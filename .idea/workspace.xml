@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="добавил кнопку Друк и в начальную страницу">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="&lt;title&gt;Selo&lt;/title&gt;">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/build/db_buildings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/db_buildings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/db_settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/db_settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/events/db_events.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/events/db_events.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/partys/duma.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/partys/duma.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +83,11 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "editing.templates",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -111,7 +121,9 @@
       <workItem from="1701463899208" duration="44000" />
       <workItem from="1701516813590" duration="19211000" />
       <workItem from="1704291269414" duration="10313000" />
-      <workItem from="1704366962891" duration="467000" />
+      <workItem from="1704366962891" duration="490000" />
+      <workItem from="1704367903011" duration="196000" />
+      <workItem from="1704487300397" duration="5137000" />
     </task>
     <task id="LOCAL-00002" summary="new">
       <option name="closed" value="true" />
@@ -191,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704367264509</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="&lt;title&gt;Selo&lt;/title&gt;">
+      <created>1704367444072</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1704367444072</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,6 +246,7 @@
     <MESSAGE value="поправил проверку количества рабочих, сделал некоторые фиксы." />
     <MESSAGE value="исправил много багов и добавил немного нового" />
     <MESSAGE value="добавил кнопку Друк и в начальную страницу" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавил кнопку Друк и в начальную страницу" />
+    <MESSAGE value="&lt;title&gt;Selo&lt;/title&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&lt;title&gt;Selo&lt;/title&gt;" />
   </component>
 </project>

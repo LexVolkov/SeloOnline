@@ -12,11 +12,11 @@ GV.MIN_CONTRACT_OFFER = 2;//Мин кол-во предложений от аг�
 GV.MAX_CONTRACT_OFFER = 8;//Макс -//-
 GV.TASK_WEEK = 4;
 GV.FORMULA_HAPPINESS = [
-    {lvl:10, migrants:30},
-    {lvl:9, migrants:25},
-    {lvl:8, migrants:15},
-    {lvl:7, migrants:10},
-    {lvl:6, migrants:5},
+    {lvl:10, migrants:15},
+    {lvl:9, migrants:12},
+    {lvl:8, migrants:10},
+    {lvl:7, migrants:5},
+    {lvl:6, migrants:3},
     {lvl:5, migrants:0},
     {lvl:4, migrants:-5},
     {lvl:3, migrants:-10},
@@ -42,6 +42,8 @@ GV.PARTY_TITLE_CHURCHMANS = "Церковники";
 GV.PARTY_TITLE_TRADES = "Торгаші";
 GV.PARTY_TITLE_FREEMANS = "Кріпаки";
 GV.PARTY_TITLE_HANDMADEMANS = "Ремісники";
+GV.PARTY_INCREMENT_JOY = 0.5;
+GV.PARTY_DECREMENT_JOY = -1;
 
 GV.BUILD_PAR_PRODUCTION = "production";
 GV.BUILD_PAR_REQUIREMENTS = "requirements";

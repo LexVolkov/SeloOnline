@@ -86,7 +86,7 @@ function Duma() {
         })
     }
     function GetTaskKey(week){
-        let week_key = Number(Math.ceil(week / 4)-1);
+        let week_key = Number(Math.ceil(week / GV.TASK_WEEK)-1);
         week_key = week_key===-1?0:week_key;
         return week_key;
     }
@@ -95,9 +95,9 @@ function Duma() {
             const task_key = GetTaskKey(week);
             parties.forEach(party => {
                 if(party.tasks[task_key] === ""){
-                    UpdateJoyLvl(party, 1);
+                    UpdateJoyLvl(party, GV.PARTY_INCREMENT_JOY);
                 }else{
-                    UpdateJoyLvl(party, -1);
+                    UpdateJoyLvl(party, GV.PARTY_DECREMENT_JOY);
                 }
             })
         }

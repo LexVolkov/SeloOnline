@@ -1,11 +1,21 @@
 //TODO первоначальная страница (ники министров)
-//TODO виды жилья
-//TODO кредит
-//TODO уровни сложности
-//TODO реалізувати лехварню
-//TODO реалізувати смерть та кладовище
+// виды жилья
+// кредит
+// уровни сложности
+// реалізувати лехварню
+// реалізувати смерть та кладовище
 // добавить событие, для завершения игры. Когда построена Ратуша
 // добавить кнопку распечатки зданий
+// если рабочий получает больлше 50, тогда он не может жить в бараках
+// статистика, сколько рабочих получают больше 50 и больше 100
+// Задания нумеровать и выдавать по порядку
+// Редактировать бюджет и людей
+// Інші села можуть запросити допомогу, та від рішення може здійснюватися різний сценарій
+// Больше ур несчатья от безх і безроб
+// Нападаючи забирають гроші та людей
+// Добавить в события Болезни, наводнение, засухи и т.д.
+// Механіка територій, у кожного будинку є кільк місяця які він займає та щоб ці территорії можна біло захоплювати
+//
 function Game(){
 	let selo = {};
     let f_initGame = false;
@@ -228,10 +238,10 @@ function Game(){
         $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance));
     }
     function CalculateHomelessJoyLvl(homeless) {
-        return homeless > 90 ? -1 : homeless > 75 ? -0.75 : homeless > 50 ? -0.5 : homeless > 25 ? -0.25 : homeless > 1 ? 0 : 1;
+        return homeless > 90 ? -1 : homeless > 75 ? -0.75 : homeless > 50 ? -0.5 : homeless > 25 ? -0.25 : homeless > 1 ? 0 : 0;
     }
     function CalculateUnemploymentJoyLvl(unemployment) {
-        return unemployment > 90 ? -1 : unemployment > 75 ? -0.75 : unemployment > 50 ? -0.5 : unemployment > 25 ? -0.25 : unemployment > 1 ? 0 : 1;
+        return unemployment > 90 ? -1 : unemployment > 75 ? -0.75 : unemployment > 50 ? -0.5 : unemployment > 25 ? -0.25 : unemployment > 1 ? 0 : 0;
     }
 
     function ShowCostsInfo() {
@@ -386,7 +396,7 @@ function Game(){
         const txt_next_week_balance = display.DisplayNWPNextWeekBalance(next_week_balance)
         let txt_error = "";
         DisableNextWeekBut(false)
-        if(costs_construction > selo.balance - costs_mainmans - costs_workers){
+        if(costs_construction > selo.balance + contract_profit){
             txt_error += display.DisplayErrorCosts();
             DisableNextWeekBut(true);
         }

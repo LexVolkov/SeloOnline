@@ -356,7 +356,7 @@ function Buildings(){
     title:"Сторожа",
     type:"Захист",
     single:false,
-    constructionTime:2,
+    constructionTime:3,
     price:500,
     workerplace:0,
     workerSalary:0,
@@ -379,7 +379,7 @@ function Buildings(){
     description:"Дає +3 до захисту міста.",
     parameters:new Building_parameters(),
     production:[],
-    requirements:[]});
+    requirements:[PRODUCTIONS.WOOD]});
 
   buildings.wall.parameters.protection = 3;
 
@@ -391,7 +391,7 @@ function Buildings(){
     constructionTime:3,
     price:2500,
     workerplace:5,
-    workerSalary:30,
+    workerSalary:150,
     description:"Дає +5 козаків.",
     parameters:new Building_parameters(),
     production:[],
@@ -399,6 +399,20 @@ function Buildings(){
 
   buildings.kazarms.parameters.cossacks = 5;
 
+  buildings.fort = new Building({
+    title:"Форт",
+    type:"Захист",
+    single:true,
+    constructionTime:7,
+    price:25000,
+    workerplace:50,
+    workerSalary:200,
+    description:"Дає +50 козаків.",
+    parameters:new Building_parameters(),
+    production:[],
+    requirements:[]});
+
+  buildings.fort.parameters.cossacks = 30;
 
   buildings.sich = new Building({
     title:"Січ",
@@ -408,7 +422,7 @@ function Buildings(){
     price:10000,
     workerplace:10,
     workerSalary:70,
-    description:"Дає гармати.",
+    description:"Дає гармати, які можуть пробити захист села на 10.",
     parameters:new Building_parameters(),
     production:[],
     requirements:[]});
