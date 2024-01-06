@@ -76,6 +76,7 @@ GV.ID_IFNO_HOMEOWNERS = "#homeowners_info";
 GV.ID_IFNO_ARMY = "#army_info";
 GV.ID_IFNO_JOYLVL = "#satlvl_info";
 GV.ID_IFNO_BUDGET = "#budget_info";
+GV.ID_EDIT_BUDGET = "#edit_balance";
 GV.ID_IFNO_COSTS = "#costs_info";
 GV.ID_IFNO_CONTRACTS = "#contracts_info";
 GV.ID_IFNO_PRODUCTION = "#production_info";

@@ -70,8 +70,13 @@ function Display() {
         ];
         return CreateCollapsible(header, arr_data);
     }
-    this.DisplayBalance = function (balance) {
-        return `<h3>Поточний бюджет села: ${GV.QCCOIN_PNG}${balance}</h3>`;
+    this.DisplayBalance = function (balance, edit) {
+        if(edit){
+            return `<input type='text' id='edit_balance' value='${balance}' /> <a href="#" onclick="game.OnSaveBalance()"  class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini  ui-icon-check ui-btn-icon-center ui-btn-icon-notext">Save</a>`
+        }else{
+            return `${GV.QCCOIN_PNG}${balance}<a href="#" onClick="game.OnEditBalance()" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini  ui-icon-edit ui-btn-icon-center ui-btn-icon-notext">Edit</a>`;
+        }
+
     }
     this.DisplayCosts = function (costs_total, costs_workers, costs_mainmans, costs_construction, collapsed = true) {
         const header = `Витрати на наступний тиждень: ${GV.QCCOIN_PNG}-${costs_total}`;

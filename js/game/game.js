@@ -235,7 +235,7 @@ function Game(){
         return {joylvl_total:joylvl_total, joylvl_unemployeds:joylvl_unemployeds, joylvl_homeless:joylvl_homeless, joylvl_parties:joylvl_parties, joylvl_buildings:joylvl_buildings};
     }
     function ShowBalanceInfo() {
-        $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance));
+        $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance, false));
     }
     function CalculateHomelessJoyLvl(homeless) {
         return homeless > 90 ? -1 : homeless > 75 ? -0.75 : homeless > 50 ? -0.5 : homeless > 25 ? -0.25 : homeless > 1 ? 0 : 0;
@@ -335,7 +335,14 @@ function Game(){
         UpdateInfo();
         this.OnNextWeek();
     }
-
+    this.OnEditBalance = function () {
+        $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance, true));
+    }
+    this.OnSaveBalance = function () {
+        selo.balance = Number($(GV.ID_EDIT_BUDGET).val());
+        $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance, false));
+        SaveGame();
+    }
     function ShowOffersInfo(){
         const offers = selo.offers.GetOffersList();
         const contract_count = selo.contracts.GetContractCount();
