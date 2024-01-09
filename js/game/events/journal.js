@@ -16,7 +16,6 @@ function Journal(){
                     if(check)check_conditions--;
                 }
             }
-
             if(check_conditions === 0 && event.event_action.action === GV.ACTION_MIGRATION ){
                 if (selo_data.migration > 0){
                     event.data.title = "Долучилися до села: ";

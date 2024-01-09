@@ -15,7 +15,8 @@
 // Нападаючи забирають гроші та людей
 // Добавить в события Болезни, наводнение, засухи и т.д.
 // Механіка територій, у кожного будинку є кільк місяця які він займає та щоб ці территорії можна біло захоплювати
-//
+// Сделать таймер лимита времена тижня
+// проверка на число при изменении баланса
 function Game(){
 	let selo = {};
     let f_initGame = false;
@@ -141,7 +142,7 @@ function Game(){
     }
     this.OnStartGame = function (){
         const startBalance =  Number($(GV.ID_START_BALANCE).val());
-        const startBuildings = ["silrada","house_of_builders", "stable", "wheat"];
+        const startBuildings = ["silrada","house_of_builders", "stable", "wheat", "brracks"];
         this.InitGame(startBalance, startBuildings);
         this.Start();
     }
@@ -238,10 +239,10 @@ function Game(){
         $(GV.ID_IFNO_BUDGET).html(display.DisplayBalance(selo.balance, false));
     }
     function CalculateHomelessJoyLvl(homeless) {
-        return homeless > 90 ? -1 : homeless > 75 ? -0.75 : homeless > 50 ? -0.5 : homeless > 25 ? -0.25 : homeless > 1 ? 0 : 0;
+        return homeless > 75 ? -1 : homeless > 50 ? -0.75 : homeless > 35 ? -0.5 : homeless > 15 ? -0.25 : homeless > 1 ? 0 : 0;
     }
     function CalculateUnemploymentJoyLvl(unemployment) {
-        return unemployment > 90 ? -1 : unemployment > 75 ? -0.75 : unemployment > 50 ? -0.5 : unemployment > 25 ? -0.25 : unemployment > 1 ? 0 : 0;
+        return unemployment > 75 ? -1 : unemployment > 50 ? -0.75 : unemployment > 35 ? -0.5 : unemployment > 15 ? -0.25 : unemployment > 1 ? 0 : 0;
     }
 
     function ShowCostsInfo() {

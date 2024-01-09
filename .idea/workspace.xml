@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="Правки">
+    <list default="true" id="ec0e4ee9-6935-444d-819f-5e89437edb2b" name="Changes" comment="Сделал кнопку редактирования бюджета">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/db_settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/db_settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/game/display.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/display.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/build/db_buildings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/build/db_buildings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/events/db_events.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/events/db_events.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/game/events/journal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/events/journal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/game/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/game/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +123,8 @@
       <workItem from="1704366962891" duration="490000" />
       <workItem from="1704367903011" duration="196000" />
       <workItem from="1704487300397" duration="5191000" />
-      <workItem from="1704536329468" duration="2286000" />
+      <workItem from="1704536329468" duration="2322000" />
+      <workItem from="1704618097814" duration="3102000" />
     </task>
     <task id="LOCAL-00002" summary="new">
       <option name="closed" value="true" />
@@ -217,7 +218,21 @@
       <option name="project" value="LOCAL" />
       <updated>1704493680966</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Сделал кнопку редактирования бюджета">
+      <created>1704538657357</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1704538657357</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Сделал кнопку редактирования бюджета">
+      <created>1704538664799</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1704538664799</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +270,7 @@
     <MESSAGE value="добавил кнопку Друк и в начальную страницу" />
     <MESSAGE value="&lt;title&gt;Selo&lt;/title&gt;" />
     <MESSAGE value="Правки" />
-    <option name="LAST_COMMIT_MESSAGE" value="Правки" />
+    <MESSAGE value="Сделал кнопку редактирования бюджета" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал кнопку редактирования бюджета" />
   </component>
 </project>

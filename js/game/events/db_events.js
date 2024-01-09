@@ -13,7 +13,7 @@ function Destiny() {
         "До села приєдналися нові люди!"));
     events.push(new SeloEvent({
             migration:[-100,-1]
-        },new EventAction(),
+        },new EventAction(GV.ACTION_MIGRATION, 0),
         "Прикро, але деякі люди пішли з села!"));
     events.push(new SeloEvent({
             money:[-10000,-1]

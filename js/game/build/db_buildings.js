@@ -438,7 +438,7 @@ function Buildings(){
     price:1000,
     workerplace:4,
     workerSalary:10,
-    description:"Назавжди піднімає рівень щастя партії Церковників на +2.",
+    description:"Назавжди піднімає рівень щастя партії Церковників на +1.",
     parameters:new Building_parameters(),
     production:[],
     requirements:[]});
@@ -453,8 +453,8 @@ function Buildings(){
     constructionTime:7,
     price:3000,
     workerplace:6,
-    workerSalary:10,
-    description:"Назавжди піднімає рівень щастя партії Церковників на +3.",
+    workerSalary:20,
+    description:"Назавжди піднімає рівень щастя партії Церковників на +2.",
     parameters:new Building_parameters(),
     production:[],
     requirements:[]});
